@@ -106,10 +106,11 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
     }
 
     footer { text-align: center; padding-top: 3rem; border-top: 1px solid ${isDarkMode ? '#1f2937' : '#d1d5db'}; }
-    footer p { color: #4b5563; }
-    footer .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+    footer .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
     footer a { color: var(--color-text-light); text-decoration: none; transition: color 0.3s; }
     footer a:hover { color: var(--primary-color); }
+    footer p { color: var(--color-text-light); font-size: 0.875rem; margin:0; }
+    footer p a { text-decoration: underline; }
   `;
 
   const sectionRenderers: Record<SectionKey, () => string> = {
@@ -151,7 +152,7 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width, initial-scale-1.0">
       <title>${sanitize(data.name)}'s Portfolio</title>
       ${getFontImports(themeSettings.fontPair)}
       <style>${css}</style>
@@ -182,11 +183,11 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
         </main>
 
         <footer>
-          <p>Designed with Portverse</p>
           <div class="social-links">
             ${data.socials.github ? `<a href="${sanitize(data.socials.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>` : ''}
             ${data.socials.linkedin ? `<a href="${sanitize(data.socials.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>` : ''}
           </div>
+          <p>Designed with Portverse</p>
         </footer>
       </div>
     </body>

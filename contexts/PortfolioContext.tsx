@@ -10,7 +10,7 @@ const initialPortfolioData: PortfolioData = {
   passion: 'I am driven by a passion for creating intuitive, beautiful, and high-performance web experiences. I thrive on solving complex problems and turning innovative ideas into reality.',
   contactEmail: 'your.email@example.com',
   skills: ['React', 'TypeScript', 'Node.js', 'UI/UX Design', 'Framer Motion', 'Next.js', 'GraphQL'],
-  socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', twitter: 'https://twitter.com' },
+  socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/kushichowdary/', twitter: 'https://twitter.com' },
   education: [{ id: 'edu1', institution: 'Institute of Technology', degree: 'B.S. in Cybernetics', duration: '2020 - 2024' }],
   experience: [{ id: 'exp1', role: 'Frontend Engineer', company: 'Future Systems Corp.', duration: '2024 - Present', description: 'Engineered and maintained hyper-responsive web applications using bleeding-edge technologies, boosting user engagement by 30%.' }],
   projects: [

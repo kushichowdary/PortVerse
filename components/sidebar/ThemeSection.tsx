@@ -6,6 +6,7 @@ const templates = [
     { id: 'futuristic', name: 'Futuristic' },
     { id: 'minimalist', name: 'Minimalist' },
     { id: 'neobrutalist', name: 'Neobrutalist' },
+    { id: 'modern', name: 'Modern' },
 ] as const;
 
 const colors = [
@@ -16,6 +17,9 @@ const colors = [
     { name: 'Rose', value: '#fb7185' },
     { name: 'Indigo', value: '#818cf8' },
     { name: 'Amber', value: '#fcd34d' },
+    { name: 'Sky', value: '#38bdf8' },
+    { name: 'Fuchsia', value: '#d946ef' },
+    { name: 'Lime', value: '#a3e635' },
 ];
 
 const fontPairs = [

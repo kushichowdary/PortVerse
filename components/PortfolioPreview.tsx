@@ -5,6 +5,7 @@ import { useToast } from '../hooks/useToast';
 import FuturisticTemplate from './templates/FuturisticTemplate';
 import MinimalistTemplate from './templates/MinimalistTemplate';
 import NeobrutalistTemplate from './templates/NeobrutalistTemplate';
+import ModernTemplate from './templates/ModernTemplate';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
@@ -12,6 +13,7 @@ const templates = {
   futuristic: FuturisticTemplate,
   minimalist: MinimalistTemplate,
   neobrutalist: NeobrutalistTemplate,
+  modern: ModernTemplate,
 };
 
 interface PortfolioPreviewProps {

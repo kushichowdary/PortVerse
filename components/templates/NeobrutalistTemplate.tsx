@@ -184,8 +184,7 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
         </main>
         
         <footer className="text-center mt-12 pt-8 border-t-2" style={{borderColor: 'var(--color-text-main)'}}>
-            <p className="opacity-70">Designed with Portverse</p>
-             <div className="flex justify-center space-x-4 mt-2">
+             <div className="flex justify-center space-x-4">
                 {data.socials.github && (
                   <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-[var(--primary-color)] transition-colors">GitHub</a>
                 )}
@@ -193,6 +192,9 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
                   <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className="font-bold underline hover:text-[var(--primary-color)] transition-colors">LinkedIn</a>
                 )}
              </div>
+            <p className="opacity-70 mt-4 text-sm">
+                Designed with Portverse
+            </p>
         </footer>
       </div>
       <style>{`

@@ -101,6 +101,12 @@
           color: #fff;
       }
 
+      .btn-futuristic:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none; /* Prevents hover effects and clicks */
+      }
+
       .btn-futuristic.primary {
           --glow-color: var(--primary-theme-color, #22d3ee);
           border-color: var(--glow-color);

@@ -18,6 +18,17 @@ const sectionVariants = {
   }
 } as const;
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
   const { themeSettings } = data;
   const isDarkMode = themeSettings.mode === 'dark';
@@ -70,27 +81,38 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
     experience: (
         <motion.section key="experience" id="experience" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
             <h2 className={`section-title ${headingFontClass}`}>03 // CHRONICLES</h2>
-            <div className="relative border-l-2 border-[var(--primary-color)]/30 pl-8 space-y-12">
+            <motion.div className="relative border-l-2 border-[var(--primary-color)]/30 pl-8 space-y-12"
+                variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+            >
                 {data.experience.map(exp => (
-                    <div key={exp.id} className="relative">
+                    <motion.div key={exp.id} className="relative" variants={itemVariants}>
                         <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-gray-100'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
                         <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{exp.duration}</p>
                         <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
                         <p className="text-[var(--primary-color)] mb-2">{exp.company}</p>
                         <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>{exp.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
                  {data.experience.length === 0 && <p className="text-gray-500">No experience added yet.</p>}
-            </div>
+            </motion.div>
         </motion.section>
     ),
     projects: (
         <motion.section key="projects" id="projects" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
             <h2 className={`section-title ${headingFontClass}`}>04 // BLUEPRINTS</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                 variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                 initial="hidden"
+                 whileInView="visible"
+                 viewport={{ once: true, amount: 0.2 }}
+            >
                 {data.projects.map(project => (
                     <motion.a href={project.link} key={project.id} target="_blank" rel="noopener noreferrer" className="block group glass-pane rounded-lg overflow-hidden transition-all duration-300 hover:border-[var(--primary-color)] transform hover:-translate-y-2"
                         whileHover={{ scale: 1.03, boxShadow: `0 0 20px ${themeSettings.primaryColor}40` }}
+                        variants={itemVariants}
                     >
                         <img src={project.imageUrl} alt={project.name} className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105" />
                         <div className="p-6">
@@ -99,38 +121,48 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                         </div>
                     </motion.a>
                 ))}
-            </div>
+            </motion.div>
              {data.projects.length === 0 && <p className="text-center text-gray-500">No projects added yet.</p>}
         </motion.section>
     ),
     achievements: (
         <motion.section key="achievements" id="achievements" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
              <h2 className={`section-title ${headingFontClass}`}>05 // ACCOLADES</h2>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+             >
                 {data.achievements.map(ach => (
-                    <div key={ach.id} className="p-6 glass-pane rounded-lg">
+                    <motion.div key={ach.id} className="p-6 glass-pane rounded-lg" variants={itemVariants}>
                         <h3 className={`${headingFontClass} text-lg font-bold text-[var(--primary-color)]`}>{ach.title}</h3>
                         <p className={`mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{ach.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
-             </div>
+             </motion.div>
              {data.achievements.length === 0 && <p className="text-center text-gray-500">No achievements added yet.</p>}
         </motion.section>
     ),
     education: (
          <motion.section key="education" id="education" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
             <h2 className={`section-title ${headingFontClass}`}>06 // ORIGINS</h2>
-            <div className="relative border-l-2 border-[var(--primary-color)]/30 pl-8 space-y-12">
+            <motion.div className="relative border-l-2 border-[var(--primary-color)]/30 pl-8 space-y-12"
+                variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+            >
                 {data.education.map(edu => (
-                    <div key={edu.id} className="relative">
+                    <motion.div key={edu.id} className="relative" variants={itemVariants}>
                         <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-gray-100'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
                         <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{edu.duration}</p>
                         <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.institution}</h3>
                         <p className="text-[var(--primary-color)]">{edu.degree}</p>
-                    </div>
+                    </motion.div>
                 ))}
                  {data.education.length === 0 && <p className="text-gray-500">No education added yet.</p>}
-            </div>
+            </motion.div>
         </motion.section>
     )
   };
@@ -183,8 +215,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
         )}
         
         <footer className={`text-center pt-12 ${isDarkMode ? 'border-t border-gray-800' : 'border-t border-gray-200'}`}>
-            <p className="text-gray-500">Designed with Portverse</p>
-             <div className="flex justify-center space-x-6 mt-4">
+             <div className="flex justify-center space-x-6 mb-4">
                 {data.socials.github && (
                   <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-[var(--primary-color)] transition-colors`}>GitHub</a>
                 )}
@@ -192,6 +223,9 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                   <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-[var(--primary-color)] transition-colors`}>LinkedIn</a>
                 )}
              </div>
+            <p className="text-gray-500 mt-4 text-sm">
+                Designed with Portverse
+            </p>
         </footer>
       </main>
       <style>{`

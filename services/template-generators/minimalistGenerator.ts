@@ -107,7 +107,9 @@ export const generateMinimalistHTML = (data: PortfolioData): string => {
     }
 
     footer { text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
-    footer p { color: var(--color-light-text); }
+    footer p { color: var(--color-light-text); font-size: 0.875rem; }
+    footer a { color: var(--color-light-text); text-decoration: underline; transition: color 0.2s; }
+    footer a:hover { color: var(--primary-color); }
   `;
   
   const sectionRenderers: Record<SectionKey, () => string> = {
@@ -151,7 +153,7 @@ export const generateMinimalistHTML = (data: PortfolioData): string => {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width, initial-scale-1.0">
       <title>${sanitize(data.name)}'s Portfolio</title>
       ${getFontImports(themeSettings.fontPair)}
       <style>${css}</style>

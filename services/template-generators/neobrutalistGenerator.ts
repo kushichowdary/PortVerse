@@ -106,8 +106,10 @@ export const generateNeobrutalistHTML = (data: PortfolioData): string => {
 
     footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--color-text-main); }
     footer p { opacity: 0.7; }
-    footer .social-links { display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem; }
-    footer a { font-weight: 700; text-decoration: underline; color: inherit; transition: color 0.2s; }
+    footer .social-links { display: flex; justify-content: center; gap: 1rem; }
+    footer a { text-decoration: underline; color: inherit; transition: color 0.2s; }
+    footer .social-links a { font-weight: 700; }
+    footer p a { font-weight: 500; }
     footer a:hover { color: var(--primary-color); }
   `;
   
@@ -180,11 +182,13 @@ export const generateNeobrutalistHTML = (data: PortfolioData): string => {
         </main>
 
         <footer>
-          <p>Designed with Portverse</p>
           <div class="social-links">
             ${data.socials.github ? `<a href="${sanitize(data.socials.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>` : ''}
             ${data.socials.linkedin ? `<a href="${sanitize(data.socials.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>` : ''}
           </div>
+          <p style="margin-top: 1rem; font-size: 0.875rem;">
+            Designed with Portverse
+          </p>
         </footer>
       </div>
     </body>

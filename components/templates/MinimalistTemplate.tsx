@@ -18,6 +18,17 @@ const sectionVariants = {
   }
 } as const;
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 const MinimalistTemplate: React.FC<TemplateProps> = ({ data }) => {
   const { themeSettings } = data;
   const isDarkMode = themeSettings.mode === 'dark';
@@ -57,36 +68,48 @@ const MinimalistTemplate: React.FC<TemplateProps> = ({ data }) => {
     experience: (
       <motion.section key="experience" id="experience" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
         <h2 className={`section-title ${headingFontClass} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Experience</h2>
-        <div className="space-y-8">
+        <motion.div className="space-y-8"
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {data.experience.map(exp => (
-            <div key={exp.id}>
+            <motion.div key={exp.id} variants={itemVariants}>
               <div className="flex justify-between items-baseline">
                 <h3 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
                 <p className={`text-sm ${isDarkMode ? 'text-gray-500' : 'text-gray-500'}`}>{exp.duration}</p>
               </div>
               <p className="text-md text-[var(--primary-color)] font-semibold">{exp.company}</p>
               <p className={`mt-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{exp.description}</p>
-            </div>
+            </motion.div>
           ))}
           {data.experience.length === 0 && <p className="text-gray-500">No experience added yet.</p>}
-        </div>
+        </motion.div>
       </motion.section>
     ),
     projects: (
       <motion.section key="projects" id="projects" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
         <h2 className={`section-title ${headingFontClass} ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {data.projects.map(project => (
-            <a href={project.link} key={project.id} target="_blank" rel="noopener noreferrer" 
-               className={`block group border rounded-lg overflow-hidden transition-all hover:shadow-xl hover:border-[var(--primary-color)] ${isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200'}`}>
+            <motion.a href={project.link} key={project.id} target="_blank" rel="noopener noreferrer" 
+               className={`block group border rounded-lg overflow-hidden transition-all hover:shadow-xl hover:border-[var(--primary-color)] ${isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200'}`}
+               variants={itemVariants}
+            >
               <img src={project.imageUrl} alt={project.name} className="w-full h-52 object-cover" />
               <div className="p-5">
                 <h3 className={`text-lg font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{project.name}</h3>
                 <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{project.description}</p>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
         {data.projects.length === 0 && <p className="text-gray-500">No projects added yet.</p>}
       </motion.section>
     ),
@@ -160,7 +183,9 @@ const MinimalistTemplate: React.FC<TemplateProps> = ({ data }) => {
         </main>
         
         <footer className={`text-center mt-20 pt-8 ${isDarkMode ? 'border-t border-gray-700' : 'border-t border-gray-200'}`}>
-            <p className="text-gray-500">Designed with Portverse</p>
+            <p className="text-gray-500 text-sm">
+                Designed with Portverse
+            </p>
         </footer>
       </div>
       <style>{`

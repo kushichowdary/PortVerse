@@ -79,6 +79,16 @@ const BuilderSidebar: React.FC = () => {
             </motion.div>
         </AnimatePresence>
       </div>
+       <div className="flex-shrink-0 pt-4 mt-2 text-center text-xs text-gray-500 border-t border-white/10">
+        <p>
+            Built by <a href="https://github.com/kushichowdary" target="_blank" rel="noopener noreferrer" className="font-semibold text-gray-400 hover:text-[var(--primary-theme-color)] transition-colors">Kushwanth</a>
+        </p>
+        <div className="flex justify-center items-center space-x-2 mt-1">
+            <a href="https://github.com/kushichowdary" target="_blank" rel="noopener noreferrer" className="underline hover:text-[var(--primary-theme-color)] transition-colors">GitHub</a>
+            <span>•</span>
+            <a href="https://www.linkedin.com/in/kushichowdary/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[var(--primary-theme-color)] transition-colors">LinkedIn</a>
+        </div>
+      </div>
     </div>
   );
 };
