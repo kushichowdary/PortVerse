@@ -5,7 +5,7 @@ import { ThemeSettings } from '../../types';
 const templates = [
     { id: 'futuristic', name: 'Futuristic' },
     { id: 'minimalist', name: 'Minimalist' },
-    { id: 'creative', name: 'Creative' },
+    { id: 'neobrutalist', name: 'Neobrutalist' },
 ] as const;
 
 const colors = [
@@ -23,6 +23,7 @@ const fontPairs = [
     { id: 'inter-lora', name: 'Inter / Lora' },
     { id: 'playfair-montserrat', name: 'Playfair / Montserrat'},
     { id: 'roboto-mono-roboto', name: 'Roboto Mono / Roboto'},
+    { id: 'space-grotesk-inter', name: 'Space Grotesk / Inter'},
 ] as const;
 
 const getHeadingFontClass = (id: string) => {
@@ -30,6 +31,7 @@ const getHeadingFontClass = (id: string) => {
     if (id.includes('playfair')) return 'font-playfair';
     if (id.includes('inter')) return 'font-inter';
     if (id.includes('roboto-mono')) return 'font-roboto-mono';
+    if (id.includes('space-grotesk')) return 'font-space-grotesk';
     return '';
 };
 
@@ -38,6 +40,7 @@ const getBodyFontClass = (id: string) => {
     if (id.includes('montserrat')) return 'font-montserrat';
     if (id.includes('lora')) return 'font-lora';
     if (id.includes('roboto')) return 'font-roboto';
+    if (id.includes('inter')) return 'font-inter';
     return '';
 };
 
@@ -67,7 +70,7 @@ const ThemeSection: React.FC = () => {
         <div className="space-y-6">
             <div>
                 <label className="sidebar-label">Template</label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                     {templates.map(template => (
                         <button 
                             key={template.id}

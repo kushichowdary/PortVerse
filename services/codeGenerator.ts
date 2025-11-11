@@ -1,12 +1,12 @@
 import { PortfolioData } from '../types';
 import { generateFuturisticHTML } from './template-generators/futuristicGenerator';
 import { generateMinimalistHTML } from './template-generators/minimalistGenerator';
-import { generateCreativeHTML } from './template-generators/creativeGenerator';
+import { generateNeobrutalistHTML } from './template-generators/neobrutalistGenerator';
 
 const generators = {
   futuristic: generateFuturisticHTML,
   minimalist: generateMinimalistHTML,
-  creative: generateCreativeHTML,
+  neobrutalist: generateNeobrutalistHTML,
 };
 
 export const generatePortfolioHTML = (data: PortfolioData): string => {

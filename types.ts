@@ -28,9 +28,9 @@ export interface Achievement extends ListItem {
 }
 
 export interface ThemeSettings {
-  templateId: 'futuristic' | 'minimalist' | 'creative';
+  templateId: 'futuristic' | 'minimalist' | 'neobrutalist';
   primaryColor: string;
-  fontPair: 'orbitron-poppins' | 'inter-lora' | 'playfair-montserrat' | 'roboto-mono-roboto';
+  fontPair: 'orbitron-poppins' | 'inter-lora' | 'playfair-montserrat' | 'roboto-mono-roboto' | 'space-grotesk-inter';
   mode: 'dark' | 'light';
 }
 

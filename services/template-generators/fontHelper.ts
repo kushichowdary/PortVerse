@@ -18,6 +18,10 @@ export const getFontImports = (fontPair: string): string => {
             fonts.add('Roboto+Mono:wght@400;500');
             fonts.add('Roboto:wght@400;500;700');
             break;
+        case 'space-grotesk-inter':
+            fonts.add('Space+Grotesk:wght@400;500;700');
+            fonts.add('Inter:wght@300;400;500;600;700');
+            break;
     }
     
     if (fonts.size === 0) return '';
@@ -35,11 +39,13 @@ export const getFontFamilies = (fontPair: string): { bodyFont: string, headingFo
         case 'orbitron-poppins':
             return { bodyFont: "'Poppins', sans-serif", headingFont: "'Orbitron', sans-serif" };
         case 'inter-lora':
-            return { bodyFont: "'Inter', sans-serif", headingFont: "'Lora', serif" };
+            return { bodyFont: "'Lora', serif", headingFont: "'Inter', sans-serif" };
         case 'playfair-montserrat':
             return { bodyFont: "'Montserrat', sans-serif", headingFont: "'Playfair Display', serif" };
         case 'roboto-mono-roboto':
             return { bodyFont: "'Roboto', sans-serif", headingFont: "'Roboto Mono', monospace" };
+        case 'space-grotesk-inter':
+            return { bodyFont: "'Inter', sans-serif", headingFont: "'Space Grotesk', sans-serif" };
         default:
              return { bodyFont: "'Poppins', sans-serif", headingFont: "'Orbitron', sans-serif" };
     }
