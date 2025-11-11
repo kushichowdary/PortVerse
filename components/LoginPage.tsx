@@ -126,7 +126,7 @@ const LoginPage: React.FC = () => {
                 {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
             </CyberButton>
           </div>
-        </form>
+        </motion.form>
         <p className="mt-6 text-gray-400">
           {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
           <button 
