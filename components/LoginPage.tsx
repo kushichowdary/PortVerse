@@ -4,7 +4,6 @@ import { auth } from '../services/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import Waves from './ui/Waves';
 import TrueFocus from './ui/TrueFocus';
-import CyberButton from './ui/CyberButton';
 import './ui/Waves.css';
 import './ui/TrueFocus.css';
 
@@ -118,13 +117,13 @@ const LoginPage: React.FC = () => {
             autoComplete={isSignUp ? "new-password" : "current-password"}
           />
           <div className="pt-2">
-            <CyberButton
+             <button
                 type="submit"
                 disabled={isSubmitting}
-                themeColor="#22d3ee"
+                className="btn-futuristic primary w-full"
             >
                 {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
-            </CyberButton>
+            </button>
           </div>
         </motion.form>
         <p className="mt-6 text-gray-400">
