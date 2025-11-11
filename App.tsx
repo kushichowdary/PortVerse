@@ -1,29 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PortfolioBuilder from './components/PortfolioBuilder';
 import LoginPage from './components/LoginPage';
 import { AnimatePresence, motion } from 'framer-motion';
 import { PortfolioProvider } from './contexts/PortfolioContext';
 import { ToastProvider } from './hooks/useToast';
+import { auth } from './services/firebase';
+import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => sessionStorage.getItem('isAuthenticated') === 'true'
-  );
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleLogin = () => {
-    sessionStorage.setItem('isAuthenticated', 'true');
-    setIsAuthenticated(true);
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsLoading(false);
+    });
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('isAuthenticated');
-    setIsAuthenticated(false);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+        console.error("Error signing out: ", error);
+    }
   };
+  
+  if (isLoading) {
+    return (
+        <div className="bg-[#0A0A0A] min-h-screen flex items-center justify-center text-center">
+            <h1 className="font-orbitron text-3xl text-cyan-400 animate-pulse">Loading Portverse...</h1>
+        </div>
+    );
+  }
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen text-white antialiased">
       <AnimatePresence mode="wait">
-        {!isAuthenticated ? (
+        {!user ? (
           <motion.div
             key="login"
             initial={{ opacity: 0 }}
@@ -31,7 +48,7 @@ const App: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <LoginPage onLogin={handleLogin} />
+            <LoginPage />
           </motion.div>
         ) : (
           <motion.div

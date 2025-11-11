@@ -184,7 +184,7 @@ export const generateMinimalistHTML = (data: PortfolioData): string => {
         </main>
 
         <footer>
-          <p>Designed with PortaVerse</p>
+          <p>Designed with Portverse</p>
         </footer>
       </div>
     </body>

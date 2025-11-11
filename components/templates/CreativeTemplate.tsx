@@ -91,7 +91,13 @@ const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
             </div>
 
             {/* Right/Bottom Section */}
-            <main className="lg:w-2/3 lg:ml-auto p-8 md:p-12 lg:p-20 space-y-16">
+            <main className="lg:w-2/3 lg:ml-auto p-8 md:p-12 lg:p-20 space-y-16 relative">
+                 <a href="#" className="lg:hidden absolute top-8 right-8 flex items-center gap-2 px-4 py-2 rounded-full text-sm border-2 border-[var(--primary-color)] text-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-black transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span>Back to Top</span>
+                </a>
                  <motion.section id="skills" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
                     <h2 className={`section-title ${headingFontClass}`}>Skills</h2>
                     <div className="flex flex-wrap gap-3">
@@ -137,7 +143,7 @@ const CreativeTemplate: React.FC<TemplateProps> = ({ data }) => {
                 </motion.section>
                 
                 <footer className={`text-center pt-10 mt-20 ${isDarkMode ? 'border-t border-gray-700' : 'border-t border-gray-200'}`}>
-                    <p className="text-gray-500 text-sm">Designed with PortaVerse</p>
+                    <p className="text-gray-500 text-sm">Designed with Portverse</p>
                 </footer>
             </main>
         </div>

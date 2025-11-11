@@ -182,7 +182,7 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
         </main>
 
         <footer>
-          <p>Designed with PortaVerse</p>
+          <p>Designed with Portverse</p>
           <div class="social-links">
             ${data.socials.github ? `<a href="${sanitize(data.socials.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>` : ''}
             ${data.socials.linkedin ? `<a href="${sanitize(data.socials.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>` : ''}

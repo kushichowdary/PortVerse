@@ -25,13 +25,13 @@ const MinimalistTemplate: React.FC<TemplateProps> = ({ data }) => {
   const fontClass = 
     themeSettings.fontPair.includes('poppins') ? 'font-poppins' :
     themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
-    themeSettings.fontPair.includes('inter') ? 'font-inter' :
+    themeSettings.fontPair.includes('lora') ? 'font-lora' :
     'font-roboto';
 
   const headingFontClass =
     themeSettings.fontPair.includes('orbitron') ? 'font-orbitron' :
     themeSettings.fontPair.includes('playfair') ? 'font-playfair' :
-    themeSettings.fontPair.includes('lora') ? 'font-lora' :
+    themeSettings.fontPair.includes('inter') ? 'font-inter' :
     'font-roboto-mono';
 
   const sectionComponents: Record<SectionKey, React.ReactNode> = {
@@ -160,7 +160,7 @@ const MinimalistTemplate: React.FC<TemplateProps> = ({ data }) => {
         </main>
         
         <footer className={`text-center mt-20 pt-8 ${isDarkMode ? 'border-t border-gray-700' : 'border-t border-gray-200'}`}>
-            <p className="text-gray-500">Designed with PortaVerse</p>
+            <p className="text-gray-500">Designed with Portverse</p>
         </footer>
       </div>
       <style>{`

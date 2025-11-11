@@ -25,13 +25,13 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
   const fontClass = 
     themeSettings.fontPair.includes('poppins') ? 'font-poppins' :
     themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
-    themeSettings.fontPair.includes('inter') ? 'font-inter' :
+    themeSettings.fontPair.includes('lora') ? 'font-lora' :
     'font-roboto';
 
   const headingFontClass =
     themeSettings.fontPair.includes('orbitron') ? 'font-orbitron' :
     themeSettings.fontPair.includes('playfair') ? 'font-playfair' :
-    themeSettings.fontPair.includes('lora') ? 'font-lora' :
+    themeSettings.fontPair.includes('inter') ? 'font-inter' :
     'font-roboto-mono';
 
   const sectionComponents: Record<SectionKey, React.ReactNode> = {
@@ -183,7 +183,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
         )}
         
         <footer className={`text-center pt-12 ${isDarkMode ? 'border-t border-gray-800' : 'border-t border-gray-200'}`}>
-            <p className="text-gray-500">Designed with PortaVerse</p>
+            <p className="text-gray-500">Designed with Portverse</p>
              <div className="flex justify-center space-x-6 mt-4">
                 {data.socials.github && (
                   <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-[var(--primary-color)] transition-colors`}>GitHub</a>

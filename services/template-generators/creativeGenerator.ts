@@ -41,8 +41,31 @@ export const generateCreativeHTML = (data: PortfolioData): string => {
     .sidebar .connect .social-links a, .sidebar .connect a.email-link { color: var(--color-text-sidebar); text-decoration: none; transition: color 0.3s; word-break: break-all; }
     .sidebar .connect .social-links a:hover, .sidebar .connect a.email-link:hover { color: var(--primary-color); }
     
-    main { padding: 2rem; }
+    main { padding: 2rem; position: relative; }
     main section { margin-bottom: 4rem; }
+    .back-to-top {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
+    .back-to-top:hover {
+        background-color: var(--primary-color);
+        color: ${isDarkMode ? '#000' : '#fff'};
+    }
+    .back-to-top svg {
+        width: 1em; height: 1em;
+    }
     .section-title {
         font-family: var(--font-heading);
         font-size: 1.25rem;
@@ -77,6 +100,7 @@ export const generateCreativeHTML = (data: PortfolioData): string => {
       .wrapper { flex-direction: row; }
       .sidebar { width: 33.333333%; height: 100vh; position: fixed; top: 0; left: 0; padding: 3rem; }
       main { width: 66.666667%; margin-left: 33.333333%; padding: 5rem; }
+      .back-to-top { display: none; }
       .project-item { flex-direction: row; align-items: flex-start; gap: 1.5rem; }
       .project-item .image-container { width: 10rem; flex-shrink: 0; }
     }
@@ -139,6 +163,10 @@ export const generateCreativeHTML = (data: PortfolioData): string => {
         </aside>
         
         <main>
+          <a href="#" class="back-to-top">
+              <svg xmlns="http://www.w3.org/2000/svg" style="width:1em;height:1em;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+              <span>Back to Top</span>
+          </a>
           <section id="skills">
             <h2 class="section-title">Skills</h2>
             ${skillsHTML}
@@ -155,7 +183,7 @@ export const generateCreativeHTML = (data: PortfolioData): string => {
           </section>
 
           <footer>
-            <p>Designed with PortaVerse</p>
+            <p>Designed with Portverse</p>
           </footer>
         </main>
       </div>
