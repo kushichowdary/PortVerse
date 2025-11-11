@@ -70,8 +70,8 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                         animate="animate"
                         exit="exit"
                         layout
-                        className="p-4 border border-gray-700 rounded-lg space-y-3 glass-pane relative">
-                         <button onClick={() => removeItem(item.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold text-xl z-10">&times;</button>
+                        className="p-4 border border-gray-700/50 rounded-lg space-y-3 bg-black/20 relative">
+                         <button onClick={() => removeItem(item.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold text-2xl z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-500/20 transition-colors">&times;</button>
                         {fields.map(field => (
                              <div key={field.name as string}>
                                  <label className="sidebar-label">{field.label}</label>
@@ -81,7 +81,7 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                                         value={item[field.name as keyof V] as string}
                                         onChange={(e) => handleInputChange(e, index)} 
                                         rows={3} 
-                                        className="input-field"
+                                        className="input-field-futuristic"
                                     />
                                  ) : (
                                      <input 
@@ -89,7 +89,7 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                                         name={field.name as string} 
                                         value={item[field.name as keyof V] as string} 
                                         onChange={(e) => handleInputChange(e, index)} 
-                                        className="input-field" 
+                                        className="input-field-futuristic" 
                                     />
                                  )}
                              </div>
@@ -100,7 +100,7 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                 )}
             </AnimatePresence>
             <div ref={endOfListRef} />
-            <button onClick={addItem} className="btn-secondary w-full">Add {singularName}</button>
+            <button onClick={addItem} className="btn-futuristic primary w-full">Add {singularName}</button>
         </div>
     );
 };

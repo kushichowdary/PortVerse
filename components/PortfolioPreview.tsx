@@ -46,32 +46,28 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ onLogout }) => {
   const SelectedTemplate = templates[portfolioData.themeSettings.templateId] || FuturisticTemplate;
 
   return (
-    <div className="w-full h-full bg-gray-900 flex flex-col relative">
-      <div className="flex-shrink-0 bg-black p-3 border-b border-gray-800 flex justify-between items-center z-10">
-        <div className="text-sm font-orbitron uppercase tracking-widest text-blue-400">
+    <div className="w-full h-full bg-transparent flex flex-col relative">
+      <div className="flex-shrink-0 p-3 flex justify-between items-center z-10 glass-pane-enhanced">
+        <div className="font-orbitron uppercase tracking-widest text-sm" style={{ color: portfolioData.themeSettings.primaryColor }}>
           Live Preview
         </div>
         <div className="flex items-center space-x-4">
           <button
             onClick={handleDownload}
             disabled={isDownloading}
-            className="px-4 py-2 bg-blue-600/20 border border-blue-500 text-blue-300 font-orbitron text-xs uppercase rounded-md backdrop-blur-sm
-                     hover:bg-blue-500 hover:text-black hover:shadow-[0_0_15px_theme(colors.blue.500)] 
-                     transition-all duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-wait"
+            className="btn-futuristic primary"
           >
             {isDownloading ? 'Generating...' : 'Download Code'}
           </button>
            <button
             onClick={onLogout}
-            className="px-4 py-2 bg-rose-600/20 border border-rose-500 text-rose-300 font-orbitron text-xs uppercase rounded-md backdrop-blur-sm
-                     hover:bg-rose-500 hover:text-black hover:shadow-[0_0_15px_theme(colors.rose.500)] 
-                     transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="btn-futuristic danger"
           >
             Logout
           </button>
         </div>
       </div>
-      <div className="flex-grow w-full h-full rounded-lg overflow-hidden relative">
+      <div className="flex-grow w-full h-full overflow-hidden relative">
         <div className="absolute inset-0 overflow-y-auto bg-[#0A0A0A]">
           <SelectedTemplate data={portfolioData} />
         </div>

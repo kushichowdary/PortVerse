@@ -35,7 +35,7 @@ const LayoutSection: React.FC = () => {
           <Reorder.Item
             key={sectionKey}
             value={sectionKey}
-            className="flex items-center justify-between p-3 bg-gray-800 rounded-md cursor-grab active:cursor-grabbing"
+            className="flex items-center justify-between p-3 bg-black/20 border border-gray-700/50 rounded-md cursor-grab active:cursor-grabbing"
             whileDrag={{ scale: 1.05, boxShadow: '0px 5px 15px rgba(0,0,0,0.3)' }}
           >
             <span className="font-medium">{sectionLabels[sectionKey]}</span>

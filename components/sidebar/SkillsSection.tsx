@@ -12,7 +12,7 @@ const SkillsSection: React.FC = () => {
     return (
         <div>
             <label className="sidebar-label">Skills (comma-separated)</label>
-            <textarea value={portfolioData.skills.join(', ')} onChange={(e) => handleSkillsChange(e.target.value)} rows={5} className="input-field"></textarea>
+            <textarea value={portfolioData.skills.join(', ')} onChange={(e) => handleSkillsChange(e.target.value)} rows={5} className="input-field-futuristic"></textarea>
         </div>
     );
 };

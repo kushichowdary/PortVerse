@@ -18,7 +18,7 @@ const ContactSection: React.FC = () => {
           name="contactEmail"
           value={portfolioData.contactEmail}
           onChange={handleInputChange}
-          className="input-field"
+          className="input-field-futuristic"
           placeholder="your.email@example.com"
         />
       </div>

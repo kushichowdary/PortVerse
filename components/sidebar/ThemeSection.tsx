@@ -28,7 +28,7 @@ const fontPairs = [
 const getHeadingFontClass = (id: string) => {
     if (id.includes('orbitron')) return 'font-orbitron';
     if (id.includes('playfair')) return 'font-playfair';
-    if (id.includes('lora')) return 'font-lora';
+    if (id.includes('inter')) return 'font-inter';
     if (id.includes('roboto-mono')) return 'font-roboto-mono';
     return '';
 };
@@ -36,7 +36,7 @@ const getHeadingFontClass = (id: string) => {
 const getBodyFontClass = (id: string) => {
     if (id.includes('poppins')) return 'font-poppins';
     if (id.includes('montserrat')) return 'font-montserrat';
-    if (id.includes('inter')) return 'font-inter';
+    if (id.includes('lora')) return 'font-lora';
     if (id.includes('roboto')) return 'font-roboto';
     return '';
 };
@@ -72,7 +72,7 @@ const ThemeSection: React.FC = () => {
                         <button 
                             key={template.id}
                             onClick={() => handleThemeChange('templateId', template.id)}
-                            className={`p-3 rounded-lg border-2 text-center transition-all text-xs ${portfolioData.themeSettings.templateId === template.id ? 'border-cyan-400 bg-cyan-900/50' : 'border-gray-600 bg-gray-800 hover:border-gray-500'}`}
+                            className={`theme-picker-btn text-xs ${portfolioData.themeSettings.templateId === template.id ? 'active' : ''}`}
                         >
                             {template.name}
                         </button>
@@ -85,13 +85,13 @@ const ThemeSection: React.FC = () => {
                  <div className="grid grid-cols-2 gap-3">
                     <button 
                         onClick={() => handleThemeChange('mode', 'dark')}
-                        className={`p-4 rounded-lg border-2 text-center transition-all ${portfolioData.themeSettings.mode === 'dark' ? 'border-cyan-400 bg-cyan-900/50' : 'border-gray-600 bg-gray-800 hover:border-gray-500'}`}
+                        className={`theme-picker-btn ${portfolioData.themeSettings.mode === 'dark' ? 'active' : ''}`}
                     >
                         Dark
                     </button>
                     <button 
                         onClick={() => handleThemeChange('mode', 'light')}
-                        className={`p-4 rounded-lg border-2 text-center transition-all ${portfolioData.themeSettings.mode === 'light' ? 'border-cyan-400 bg-cyan-900/50' : 'border-gray-600 bg-gray-800 hover:border-gray-500'}`}
+                        className={`theme-picker-btn ${portfolioData.themeSettings.mode === 'light' ? 'active' : ''}`}
                     >
                         Light
                     </button>
@@ -105,8 +105,8 @@ const ThemeSection: React.FC = () => {
                         <button 
                             key={color.value}
                             onClick={() => handleThemeChange('primaryColor', color.value)}
-                            className={`w-10 h-10 rounded-full border-2 transition-all ${portfolioData.themeSettings.primaryColor === color.value ? 'border-white scale-110' : 'border-transparent'}`}
-                            style={{ backgroundColor: color.value }}
+                            className={`w-10 h-10 rounded-full border-2 transition-all ${portfolioData.themeSettings.primaryColor === color.value ? 'border-white scale-110 shadow-lg' : 'border-transparent'}`}
+                            style={{ backgroundColor: color.value, boxShadow: portfolioData.themeSettings.primaryColor === color.value ? `0 0 15px ${color.value}` : 'none' }}
                             title={color.name}
                         />
                     ))}
@@ -120,7 +120,7 @@ const ThemeSection: React.FC = () => {
                         <button 
                             key={font.id}
                             onClick={() => handleThemeChange('fontPair', font.id)}
-                            className={`p-4 rounded-lg border-2 text-center transition-all ${portfolioData.themeSettings.fontPair === font.id ? 'border-cyan-400 bg-cyan-900/50' : 'border-gray-600 bg-gray-800 hover:border-gray-500'}`}
+                            className={`theme-picker-btn ${portfolioData.themeSettings.fontPair === font.id ? 'active' : ''}`}
                         >
                             <span className={getHeadingFontClass(font.id)}>Heading</span> 
                             {' / '}
@@ -134,22 +134,11 @@ const ThemeSection: React.FC = () => {
                 <label className="sidebar-label text-red-400">Danger Zone</label>
                 <button
                     onClick={handleReset}
-                    className="w-full btn-secondary border-red-500 text-red-400 hover:bg-red-500/20"
+                    className="w-full btn-futuristic danger"
                 >
                     Reset Portfolio
                 </button>
             </div>
-
-             <style>{`
-                .font-orbitron { font-family: 'Orbitron', sans-serif; }
-                .font-poppins { font-family: 'Poppins', sans-serif; }
-                .font-inter { font-family: 'Inter', sans-serif; }
-                .font-lora { font-family: 'Lora', serif; }
-                .font-playfair { font-family: 'Playfair Display', serif; }
-                .font-montserrat { font-family: 'Montserrat', sans-serif; }
-                .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
-                .font-roboto { font-family: 'Roboto', sans-serif; }
-            `}</style>
         </div>
     );
 };

@@ -13,6 +13,7 @@
       body {
         font-family: 'Poppins', sans-serif;
         background-color: #0A0A0A;
+        overflow: hidden; /* Prevent scrollbars from builder layout shift */
       }
       .font-orbitron {
         font-family: 'Orbitron', sans-serif;
@@ -23,6 +24,197 @@
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
+      
+      /* --- Futuristic Theme Styles --- */
+      :root {
+        --glow-radius: 6px;
+        --glow-spread: 2px;
+        --transition-speed: 0.4s;
+      }
+
+      .dynamic-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: radial-gradient(
+            600px circle at var(--mouse-x) var(--mouse-y),
+            var(--bg-gradient-color),
+            transparent 40%
+          );
+          z-index: -2;
+          transition: background 0.2s linear;
+      }
+      
+      .glass-pane-enhanced {
+          background-color: rgba(12, 16, 28, 0.6);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 1rem;
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+      
+      .btn-futuristic {
+          position: relative;
+          padding: 0.75rem 1.5rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 0.5rem;
+          font-family: 'Orbitron', sans-serif;
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: #fff;
+          background-color: transparent;
+          backdrop-filter: blur(5px);
+          overflow: hidden;
+          cursor: pointer;
+          transition: all var(--transition-speed) ease;
+          z-index: 1;
+      }
+
+      .btn-futuristic::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          transition: left var(--transition-speed) ease;
+          z-index: -1;
+      }
+
+      .btn-futuristic:hover::before {
+          left: 100%;
+      }
+
+      .btn-futuristic:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 0 calc(var(--glow-radius) * 2) var(--glow-spread) var(--glow-color, #fff);
+          border-color: var(--glow-color, #fff);
+          color: #fff;
+      }
+
+      .btn-futuristic.primary {
+          --glow-color: var(--primary-theme-color, #22d3ee);
+          border-color: var(--glow-color);
+          color: var(--glow-color);
+      }
+
+      .btn-futuristic.primary:hover {
+          background-color: var(--glow-color);
+          color: #0A0A0A;
+      }
+      
+      .btn-futuristic.danger {
+          --glow-color: #f43f5e; /* rose-500 */
+          border-color: var(--glow-color);
+          color: var(--glow-color);
+      }
+
+      .btn-futuristic.danger:hover {
+          background-color: var(--glow-color);
+          color: #fff;
+      }
+      
+      .input-field-futuristic {
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #e0e0e0;
+          padding: 0.75rem 1rem;
+          border-radius: 0.5rem;
+          transition: all 0.2s ease-in-out;
+          font-size: 0.9rem;
+          backdrop-filter: blur(3px);
+      }
+      .input-field-futuristic::placeholder { color: #777; }
+      .input-field-futuristic:focus {
+          outline: none;
+          border-color: var(--primary-theme-color, #22d3ee);
+          box-shadow: 0 0 15px var(--primary-theme-color, #22d3ee);
+      }
+      
+      .sidebar-tabs {
+        position: relative;
+        display: flex;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .sidebar-tab {
+        position: relative;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #9ca3af;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s;
+        z-index: 1;
+        white-space: nowrap;
+      }
+      .sidebar-tab.active {
+        color: #fff;
+      }
+      .sidebar-tab-indicator {
+        position: absolute;
+        bottom: -1px;
+        height: 2px;
+        background-color: var(--primary-theme-color, #22d3ee);
+        border-radius: 2px;
+        box-shadow: 0 0 10px var(--primary-theme-color, #22d3ee);
+        z-index: 0;
+      }
+
+      .sidebar-label {
+          color: var(--primary-theme-color, #22d3ee);
+          font-size: 0.875rem;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+          display: block;
+      }
+      
+      .theme-picker-btn {
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background-color: rgba(0,0,0,0.2);
+          transition: all 0.2s ease;
+          text-align: center;
+      }
+      .theme-picker-btn:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.3);
+      }
+      .theme-picker-btn.active {
+          border-color: var(--primary-theme-color, #22d3ee);
+          background-color: var(--primary-theme-color-trans, rgba(34, 211, 238, 0.1));
+          box-shadow: inset 0 0 10px var(--primary-theme-color-trans, rgba(34, 211, 238, 0.2)), 0 0 10px var(--primary-theme-color, #22d3ee);
+          color: #fff;
+      }
+      
+      /* Scrollbar styles */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
     </style>
   <script type="importmap">
 {

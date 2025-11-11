@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BuilderSection } from '../../types';
 import PersonalSection from './PersonalSection';
 import SkillsSection from './SkillsSection';
@@ -9,9 +9,23 @@ import AchievementsSection from './AchievementsSection';
 import ThemeSection from './ThemeSection';
 import ContactSection from './ContactSection';
 import LayoutSection from './LayoutSection';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const BuilderSidebar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<BuilderSection>(BuilderSection.PERSONAL);
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    const activeTab = tabsRef.current.find(tab => tab?.textContent === activeSection);
+    if (activeTab) {
+      setIndicatorStyle({
+        left: activeTab.offsetLeft,
+        width: activeTab.offsetWidth
+      });
+    }
+  }, [activeSection]);
+
 
   const renderSection = () => {
     switch (activeSection) {
@@ -29,60 +43,42 @@ const BuilderSidebar: React.FC = () => {
   };
 
   return (
-    <div className="text-gray-200">
-      <h2 className="font-orbitron text-2xl font-bold text-white mb-6">Portfolio Editor</h2>
-      <div className="flex space-x-1 border-b border-gray-800 mb-6 overflow-x-auto pb-1">
-        {Object.values(BuilderSection).map(section => (
-          <button
-            key={section}
-            onClick={() => setActiveSection(section)}
-            className={`px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
-              activeSection === section 
-                ? 'border-b-2 border-cyan-400 text-cyan-300' 
-                : 'text-gray-400 hover:text-white'
-            }`}
-          >
-            {section}
-          </button>
-        ))}
+    <div className="text-gray-200 h-full flex flex-col">
+      <h2 className="font-orbitron text-2xl font-bold text-white mb-6 flex-shrink-0">Portfolio Editor</h2>
+      {/* FIX: Cast style object to React.CSSProperties to allow custom CSS properties. */}
+      <div className="relative overflow-x-auto flex-shrink-0" style={{'--scrollbar-height': '4px'} as React.CSSProperties}>
+        <div className="sidebar-tabs">
+          {Object.values(BuilderSection).map((section, index) => (
+            <button
+              key={section}
+              // FIX: Use a function block for the ref callback to ensure a void return type.
+              ref={el => { tabsRef.current[index] = el; }}
+              onClick={() => setActiveSection(section)}
+              className={`sidebar-tab ${activeSection === section ? 'active' : ''}`}
+            >
+              {section}
+            </button>
+          ))}
+          <motion.div
+            className="sidebar-tab-indicator"
+            animate={indicatorStyle}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          />
+        </div>
       </div>
-      <div className="transition-opacity duration-300">
-        {renderSection()}
+      <div className="flex-grow overflow-y-auto pr-2 -mr-4">
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+            >
+                {renderSection()}
+            </motion.div>
+        </AnimatePresence>
       </div>
-       <style>{`
-        .input-field {
-          width: 100%;
-          background-color: #0F0F0F;
-          border: 1px solid #333;
-          color: #e0e0e0;
-          padding: 0.75rem;
-          border-radius: 0.375rem;
-          transition: all 0.2s ease-in-out;
-        }
-        .input-field:focus {
-          outline: none;
-          border-color: #00ffff;
-          box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-        .btn-secondary {
-            padding: 0.5rem 1rem;
-            background-color: transparent;
-            border: 1px solid #00BFFF;
-            color: #00BFFF;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .btn-secondary:hover {
-            background-color: rgba(0, 191, 255, 0.2);
-        }
-        .sidebar-label {
-            color: #22d3ee;
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-            display: block;
-        }
-      `}</style>
     </div>
   );
 };

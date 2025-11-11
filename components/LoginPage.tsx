@@ -4,6 +4,7 @@ import { auth } from '../services/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import Waves from './ui/Waves';
 import TrueFocus from './ui/TrueFocus';
+import CyberButton from './ui/CyberButton';
 import './ui/Waves.css';
 import './ui/TrueFocus.css';
 
@@ -116,15 +117,15 @@ const LoginPage: React.FC = () => {
             required
             autoComplete={isSignUp ? "new-password" : "current-password"}
           />
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full px-8 py-3 bg-cyan-500/20 border-2 border-cyan-400 text-cyan-300 font-orbitron text-lg uppercase rounded-lg backdrop-blur-sm
-                     hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_20px_theme(colors.cyan.400),0_0_40px_theme(colors.cyan.500)] 
-                     transition-all duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-wait"
-          >
-            {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
-          </button>
+          <div className="pt-2">
+            <CyberButton
+                type="submit"
+                disabled={isSubmitting}
+                themeColor="#22d3ee"
+            >
+                {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
+            </CyberButton>
+          </div>
         </form>
         <p className="mt-6 text-gray-400">
           {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
