@@ -2,6 +2,10 @@
 
 **Design Your Future. Effortlessly.**
 
+<img width="1883" height="867" alt="Image" src="https://github.com/user-attachments/assets/28c677d5-8531-45a3-a636-22d3175442f1" />
+
+---
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.x-blue?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -80,7 +84,7 @@ The codebase is organized to be clean, modular, and easy to navigate.
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
 
-## 🙏 Acknowledgements & Contact
+## Acknowledgements & Contact
 
 This project was designed and developed by [Kushwanth Chowdary](https://github.com/kushichowdary).
 
