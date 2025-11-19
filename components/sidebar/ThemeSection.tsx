@@ -11,6 +11,7 @@ const templates = [
     { id: 'elegant', name: 'Elegant' },
     { id: 'techdoc', name: 'TechDoc' },
     { id: 'studio', name: 'Studio' },
+    { id: 'cyber', name: 'Cyber' },
 ] as const;
 
 const colors = [

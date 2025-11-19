@@ -1,12 +1,12 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../services/firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { initialPortfolioData } from '../contexts/PortfolioContext';
 import Waves from './ui/Waves';
-import TrueFocus from './ui/TrueFocus';
+import FuzzyText from './ui/FuzzyText';
 import './ui/Waves.css';
-import './ui/TrueFocus.css';
 
 const LoginPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -93,29 +93,45 @@ const LoginPage: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="relative z-10 text-center flex flex-col items-center w-full max-w-md"
       >
-        <div className="h-24 flex items-center justify-center">
-          <TrueFocus
-            sentence="Portverse"
-            manualMode={true}
-            borderColor="#8b5cf6"
-            glowColor="rgba(139, 92, 246, 0.6)"
-            animationDuration={0.3}
-            blurAmount={3}
-          />
+        {/* Cinematic Title Animation */}
+        <div className="mb-6 relative z-20 flex flex-col items-center justify-center group cursor-default">
+           <FuzzyText 
+             fontSize="clamp(3rem, 5vw, 4.5rem)" 
+             fontWeight={900} 
+             fontFamily="Orbitron, sans-serif" 
+             color="#8b5cf6"
+             enableHover={true}
+             baseIntensity={0.15}
+             hoverIntensity={0.5}
+           >
+             PORTVERSE
+           </FuzzyText>
         </div>
 
-        <p className="mt-2 text-lg font-light text-slate-400">
-          {isSignUp ? 'Create an account to start building.' : 'Sign in to your workspace.'}
+        <p className="mt-2 text-lg font-light text-slate-400 tracking-wide">
+          {isSignUp ? 'Design your future.' : 'Enter the portal.'}
         </p>
 
         <motion.form
           onSubmit={handleSubmit}
-          className="w-full mt-12 p-8 login-card-interactive rounded-2xl space-y-6"
+          className="w-full mt-8 p-8 login-card-interactive rounded-2xl space-y-6 relative overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {error && <p className="text-red-400 bg-red-900/20 p-3 rounded-md border border-red-900/50 text-sm">{error}</p>}
+          {/* Subtle grid background for form */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+          
+          {error && (
+             <motion.div 
+                initial={{ opacity: 0, height: 0 }} 
+                animate={{ opacity: 1, height: 'auto' }}
+                className="text-red-300 bg-red-900/30 p-3 rounded-lg border border-red-500/30 text-sm flex items-center gap-2 backdrop-blur-sm"
+             >
+                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                {error}
+             </motion.div>
+          )}
           
           <AnimatePresence>
             {isSignUp && (
@@ -125,54 +141,70 @@ const LoginPage: React.FC = () => {
                     exit={{ opacity: 0, height: 0, marginBottom: 0 }}
                     className="overflow-hidden"
                 >
-                     <input
-                        type="text"
-                        placeholder="Full Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="input-field-modern"
-                        required={isSignUp}
-                        autoComplete="name"
-                    />
+                     <div className="relative">
+                        <label className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1 block ml-1">Full Name</label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="input-field-modern w-full"
+                            placeholder="e.g. Alex Sterling"
+                            required={isSignUp}
+                            autoComplete="name"
+                        />
+                     </div>
                 </motion.div>
             )}
           </AnimatePresence>
 
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field-modern"
-            required
-            autoComplete="email"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field-modern"
-            required
-            autoComplete={isSignUp ? "new-password" : "current-password"}
-          />
-          <div className="pt-2">
+          <div className="relative">
+            <label className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1 block ml-1">Email</label>
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field-modern w-full"
+                placeholder="name@example.com"
+                required
+                autoComplete="email"
+            />
+          </div>
+
+          <div className="relative">
+            <label className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1 block ml-1">Password</label>
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field-modern w-full"
+                placeholder="••••••••"
+                required
+                autoComplete={isSignUp ? "new-password" : "current-password"}
+            />
+          </div>
+
+          <div className="pt-4">
              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-modern primary w-full py-3 text-base"
+                className="btn-modern primary w-full py-3.5 text-base relative overflow-hidden group"
             >
-                {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                    {isSubmitting && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>}
+                    {isSubmitting ? 'Processing...' : (isSignUp ? 'Create Account' : 'Access Workspace')}
+                </span>
+                {/* Button hover shine effect */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
             </button>
           </div>
         </motion.form>
-        <p className="mt-6 text-slate-400 text-sm">
-          {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+        <p className="mt-8 text-slate-500 text-sm">
+          {isSignUp ? 'Already initialized? ' : "New to the system? "}
           <button 
             onClick={() => { setIsSignUp(!isSignUp); setError(''); }} 
-            className="font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+            className="font-bold text-violet-400 hover:text-violet-300 transition-colors border-b border-transparent hover:border-violet-300 pb-0.5"
           >
-            {isSignUp ? 'Sign In' : 'Sign Up'}
+            {isSignUp ? 'Login' : 'Initialize'}
           </button>
         </p>
       </motion.div>

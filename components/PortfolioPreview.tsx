@@ -10,6 +10,7 @@ import ModernTemplate from './templates/ModernTemplate';
 import ElegantTemplate from './templates/ElegantTemplate';
 import TechDocTemplate from './templates/TechDocTemplate';
 import StudioTemplate from './templates/StudioTemplate';
+import CyberTemplate from './templates/CyberTemplate';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
@@ -21,6 +22,7 @@ const templates = {
   elegant: ElegantTemplate,
   techdoc: TechDocTemplate,
   studio: StudioTemplate,
+  cyber: CyberTemplate,
 };
 
 interface PortfolioPreviewProps {

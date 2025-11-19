@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../contexts/PortfolioContext';
 import { PortfolioData, ListItem } from '../../types';
+import { useToast } from '../../hooks/useToast';
 
 const listContainerVariants = {
     hidden: { opacity: 0 },
@@ -37,6 +38,7 @@ interface ListSectionProps<T extends ListSectionName, V extends ListItem> {
 
 export const ListSection = <T extends ListSectionName, V extends ListItem>({ sectionName, singularName, fields, defaultItem, maxItems }: ListSectionProps<T, V>) => {
     const { portfolioData, dispatch } = usePortfolio();
+    const { addToast } = useToast();
     const endOfListRef = useRef<HTMLDivElement>(null);
     const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -45,6 +47,16 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
         const { name, value } = e.target;
         updateItem(index, name as keyof Omit<V, 'id'>, value);
+    };
+
+    const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>, label: string, type?: string) => {
+        if (type === 'url' && e.target.value) {
+            try {
+                new URL(e.target.value);
+            } catch (_) {
+                addToast(`Invalid URL format for ${label}. Please ensure it starts with http:// or https://`, 'error');
+            }
+        }
     };
 
     const updateItem = (index: number, field: keyof Omit<V, 'id'>, value: any) => {
@@ -154,7 +166,8 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                                             type={field.type || 'text'} 
                                             name={field.name as string} 
                                             value={item[field.name as keyof V] as string} 
-                                            onChange={(e) => handleInputChange(e, index)} 
+                                            onChange={(e) => handleInputChange(e, index)}
+                                            onBlur={(e) => handleInputBlur(e, field.label, field.type)}
                                             className="input-field-modern" 
                                         />
                                      )}

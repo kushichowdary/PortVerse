@@ -7,6 +7,7 @@ import { generateModernHTML } from './template-generators/modernGenerator';
 import { generateElegantHTML } from './template-generators/elegantGenerator';
 import { generateTechDocHTML } from './template-generators/techDocGenerator';
 import { generateStudioHTML } from './template-generators/studioGenerator';
+import { generateCyberHTML } from './template-generators/cyberGenerator';
 
 const generators = {
   futuristic: generateFuturisticHTML,
@@ -16,6 +17,7 @@ const generators = {
   elegant: generateElegantHTML,
   techdoc: generateTechDocHTML,
   studio: generateStudioHTML,
+  cyber: generateCyberHTML,
 };
 
 export const generatePortfolioHTML = (data: PortfolioData): string => {
