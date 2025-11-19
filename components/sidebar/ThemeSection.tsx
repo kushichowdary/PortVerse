@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { usePortfolio } from '../../contexts/PortfolioContext';
 import { ThemeSettings } from '../../types';
@@ -7,6 +8,9 @@ const templates = [
     { id: 'minimalist', name: 'Minimalist' },
     { id: 'neobrutalist', name: 'Neobrutalist' },
     { id: 'modern', name: 'Modern' },
+    { id: 'elegant', name: 'Elegant' },
+    { id: 'techdoc', name: 'TechDoc' },
+    { id: 'studio', name: 'Studio' },
 ] as const;
 
 const colors = [
@@ -20,6 +24,10 @@ const colors = [
     { name: 'Sky', value: '#38bdf8' },
     { name: 'Fuchsia', value: '#d946ef' },
     { name: 'Lime', value: '#a3e635' },
+    { name: 'Slate', value: '#94a3b8' },
+    { name: 'Gold', value: '#d4af37' },
+    { name: 'Black', value: '#000000' },
+    { name: 'Blue', value: '#3b82f6' },
 ];
 
 const fontPairs = [
@@ -28,6 +36,7 @@ const fontPairs = [
     { id: 'playfair-montserrat', name: 'Playfair / Montserrat'},
     { id: 'roboto-mono-roboto', name: 'Roboto Mono / Roboto'},
     { id: 'space-grotesk-inter', name: 'Space Grotesk / Inter'},
+    { id: 'cinzel-lato', name: 'Cinzel / Lato'},
 ] as const;
 
 const getHeadingFontClass = (id: string) => {
@@ -36,6 +45,7 @@ const getHeadingFontClass = (id: string) => {
     if (id.includes('inter')) return 'font-inter';
     if (id.includes('roboto-mono')) return 'font-roboto-mono';
     if (id.includes('space-grotesk')) return 'font-space-grotesk';
+    if (id.includes('cinzel')) return 'font-serif';
     return '';
 };
 
@@ -45,6 +55,7 @@ const getBodyFontClass = (id: string) => {
     if (id.includes('lora')) return 'font-lora';
     if (id.includes('roboto')) return 'font-roboto';
     if (id.includes('inter')) return 'font-inter';
+    if (id.includes('lato')) return 'font-sans';
     return '';
 };
 
@@ -137,11 +148,11 @@ const ThemeSection: React.FC = () => {
                 </div>
             </div>
             
-            <div className="pt-4 mt-4 border-t border-gray-800">
+            <div className="pt-4 mt-4 border-t border-slate-700/50">
                 <label className="sidebar-label text-red-400">Danger Zone</label>
                 <button
                     onClick={handleReset}
-                    className="w-full btn-futuristic danger"
+                    className="w-full btn-modern danger"
                 >
                     Reset Portfolio
                 </button>

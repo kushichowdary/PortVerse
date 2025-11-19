@@ -13,7 +13,7 @@ const ProjectsSection: React.FC = () => {
         <div>
             <div className="flex justify-between items-center mb-4">
                 <label className="sidebar-label" style={{ marginBottom: 0 }}>Your Projects</label>
-                <span className="text-sm font-mono text-gray-400">{projectCount} / {MAX_PROJECTS}</span>
+                <span className="text-sm font-mono text-slate-500">{projectCount} / {MAX_PROJECTS}</span>
             </div>
             <ListSection<'projects', Project>
                 sectionName="projects"
@@ -25,7 +25,7 @@ const ProjectsSection: React.FC = () => {
                     { name: 'imageUrl', label: 'Project Image', isImageUpload: true },
                     { name: 'link', label: 'Project Link', type: 'url' },
                 ]}
-                defaultItem={{ name: 'New Project', description: '', imageUrl: 'https://picsum.photos/seed/new/600/400', link: '' }}
+                defaultItem={{ name: 'New Project', description: '', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', link: '' }}
             />
         </div>
     );

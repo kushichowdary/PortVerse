@@ -1,3 +1,4 @@
+
 export interface ListItem {
   id: string;
 }
@@ -28,9 +29,9 @@ export interface Achievement extends ListItem {
 }
 
 export interface ThemeSettings {
-  templateId: 'futuristic' | 'minimalist' | 'neobrutalist' | 'modern';
+  templateId: 'futuristic' | 'minimalist' | 'neobrutalist' | 'modern' | 'elegant' | 'techdoc' | 'studio';
   primaryColor: string;
-  fontPair: 'orbitron-poppins' | 'inter-lora' | 'playfair-montserrat' | 'roboto-mono-roboto' | 'space-grotesk-inter';
+  fontPair: 'orbitron-poppins' | 'inter-lora' | 'playfair-montserrat' | 'roboto-mono-roboto' | 'space-grotesk-inter' | 'cinzel-lato';
   mode: 'dark' | 'light';
 }
 

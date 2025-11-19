@@ -2,30 +2,29 @@ import React, { createContext, useContext, useReducer, useEffect, ReactNode } fr
 import { PortfolioData } from '../types';
 
 // --- INITIAL STATE ---
-const initialPortfolioData: PortfolioData = {
-  name: 'Your Name',
-  tagline: 'Futuristic Developer & Digital Artisan',
-  avatarUrl: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
-  bio: 'A passionate creator building amazing things for the web of tomorrow. This is your chance to shine and tell your story.',
-  passion: 'I am driven by a passion for creating intuitive, beautiful, and high-performance web experiences. I thrive on solving complex problems and turning innovative ideas into reality.',
-  contactEmail: 'your.email@example.com',
-  skills: ['React', 'TypeScript', 'Node.js', 'UI/UX Design', 'Framer Motion', 'Next.js', 'GraphQL'],
-  socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/kushichowdary/', twitter: 'https://twitter.com' },
-  education: [{ id: 'edu1', institution: 'Institute of Technology', degree: 'B.S. in Cybernetics', duration: '2020 - 2024' }],
-  experience: [{ id: 'exp1', role: 'Frontend Engineer', company: 'Future Systems Corp.', duration: '2024 - Present', description: 'Engineered and maintained hyper-responsive web applications using bleeding-edge technologies, boosting user engagement by 30%.' }],
+export const initialPortfolioData: PortfolioData = {
+  name: 'Alex Sterling',
+  tagline: 'Creative Developer & UI Specialist',
+  avatarUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&auto=format&fit=crop&q=60',
+  bio: 'I am a dedicated developer with a passion for building digital products that solve real-world problems. With a focus on user experience and clean code, I strive to create software that is both beautiful and functional.',
+  passion: 'Building intuitive digital experiences that empower users.',
+  contactEmail: 'alex.sterling@example.com',
+  skills: ['React', 'TypeScript', 'Node.js', 'UI Design', 'Tailwind CSS'],
+  socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', twitter: 'https://twitter.com' },
+  education: [{ id: 'edu1', institution: 'State University', degree: 'B.S. Computer Science', duration: '2019 - 2023' }],
+  experience: [{ id: 'exp1', role: 'Frontend Developer', company: 'Tech Solutions Inc.', duration: '2023 - Present', description: 'Developing responsive web applications and optimizing frontend performance for enterprise clients.' }],
   projects: [
-    { id: 'proj1', name: 'Project Neo', description: 'A revolutionary app that changes the way people interact with decentralized technology.', imageUrl: 'https://picsum.photos/seed/neo/600/400', link: '#' },
-    { id: 'proj2', name: 'Project Cygnus', description: 'An innovative platform for creative professionals to showcase their work in immersive 3D.', imageUrl: 'https://picsum.photos/seed/cygnus/600/400', link: '#' },
+    { id: 'proj1', name: 'Task Master', description: 'A productivity application designed to help teams manage workflows efficiently.', imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80', link: '#' },
+    { id: 'proj2', name: 'E-Commerce Platform', description: 'A full-featured online store with secure payment integration and inventory management.', imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80', link: '#' },
   ],
   achievements: [
-      { id: 'ach1', title: 'Innovation Award 2024', description: 'Awarded for developing a novel UI component library that increased development speed by 40%.' },
-      { id: 'ach2', title: 'Global Hackathon Winner', description: 'First place in the annual global hackathon for creating a real-time data visualization tool for climate change.'}
+      { id: 'ach1', title: 'Best UI Design', description: 'Awarded for the most intuitive user interface at the annual WebDev Summit.' },
   ],
   themeSettings: {
-    templateId: 'futuristic',
-    primaryColor: '#22d3ee', // cyan-400
-    fontPair: 'orbitron-poppins',
-    mode: 'dark',
+    templateId: 'modern',
+    primaryColor: '#8b5cf6', // Violet
+    fontPair: 'inter-lora',
+    mode: 'light',
   },
   sectionOrder: ['profile', 'passion', 'skills', 'experience', 'projects', 'achievements', 'education']
 };
@@ -44,7 +43,6 @@ const portfolioReducer = (state: PortfolioData, action: Action): PortfolioData =
     case 'REPLACE_DATA':
         return action.payload;
     case 'RESET_DATA':
-        // Clear from local storage as well to ensure a clean reset on refresh
         localStorage.removeItem('portfolioData');
         return initialPortfolioData;
     default:
@@ -66,7 +64,6 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
     try {
       const storedData = localStorage.getItem('portfolioData');
       const parsedData = storedData ? JSON.parse(storedData) : initial;
-      // Ensure sectionOrder exists for users with old data
       if (!parsedData.sectionOrder) {
         parsedData.sectionOrder = initial.sectionOrder;
       }
@@ -92,7 +89,6 @@ export const PortfolioProvider: React.FC<{ children: ReactNode }> = ({ children 
   );
 };
 
-// --- CUSTOM HOOK ---
 export const usePortfolio = (): PortfolioContextType => {
   const context = useContext(PortfolioContext);
   if (!context) {

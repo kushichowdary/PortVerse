@@ -13,11 +13,11 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
       --primary-color: ${sanitize(themeSettings.primaryColor)};
       --font-body: ${bodyFont};
       --font-heading: ${headingFont};
-      --color-bg: ${isDarkMode ? '#0A0A0A' : '#f3f4f6'};
-      --color-text: ${isDarkMode ? '#e5e7eb' : '#374151'};
-      --color-text-light: ${isDarkMode ? '#9ca3af' : '#6b7280'};
-      --color-heading-text: ${isDarkMode ? '#ffffff' : '#111827'};
-      --timeline-node-bg: ${isDarkMode ? '#0A0A0A' : '#f3f4f6'};
+      --color-bg: ${isDarkMode ? '#0A0A0A' : '#e2e8f0'};
+      --color-text: ${isDarkMode ? '#e5e7eb' : '#334155'};
+      --color-text-light: ${isDarkMode ? '#9ca3af' : '#64748b'};
+      --color-heading-text: ${isDarkMode ? '#ffffff' : '#0f172a'};
+      --timeline-node-bg: ${isDarkMode ? '#0A0A0A' : '#e2e8f0'};
     }
     *, *::before, *::after { box-sizing: border-box; }
     body {
@@ -33,16 +33,17 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
     .background-effects { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at top left, ${sanitize(themeSettings.primaryColor)}1A, transparent 30%),radial-gradient(circle at bottom right, ${sanitize(themeSettings.primaryColor)}1A, transparent 30%); }
     
     .glass-pane {
-      background-color: ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.5)'};
+      background-color: ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.7)'};
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
-      border: 1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+      border: 1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+      box-shadow: ${isDarkMode ? 'none' : '0 4px 6px rgba(0,0,0,0.05)'};
     }
     
     header { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem; margin-bottom: 8rem; }
     header img { width: 10rem; height: 10rem; border-radius: 9999px; object-fit: cover; border: 4px solid var(--primary-color); box-shadow: 0 0 25px ${sanitize(themeSettings.primaryColor)}33; }
     header h1 { font-family: var(--font-heading); font-size: 3.75rem; font-weight: 900; text-transform: uppercase; color: var(--color-heading-text); letter-spacing: 0.05em; margin: 0; }
-    header p { font-size: 1.25rem; color: var(--primary-color); margin: 0; }
+    header p { font-size: 1.25rem; color: var(--primary-color); margin: 0; font-weight: 600; }
     @media (min-width: 768px) {
       header { flex-direction: row; text-align: left; }
     }
@@ -51,22 +52,22 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
 
     .section-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary-color); margin: 0 0 2.5rem 0; }
     
-    #profile p { line-height: 1.6; max-width: 48rem; margin: 0 auto; text-align: center; padding: 2rem; border-radius: 1rem; }
+    #profile p { line-height: 1.6; max-width: 48rem; margin: 0 auto; text-align: center; padding: 2rem; border-radius: 1rem; font-weight: 500; }
     
     #passion { position: relative; text-align: center; }
     #passion .content { padding: 2rem; border-radius: 1rem; border: 1px solid ${sanitize(themeSettings.primaryColor)}4D; }
     #passion h3 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-heading-text); margin: 0 0 1rem 0; }
-    #passion p { color: var(--primary-color); opacity: 0.9; font-size: 1.125rem; max-width: 42rem; margin: 0 auto; }
+    #passion p { color: var(--primary-color); opacity: 0.9; font-size: 1.125rem; max-width: 42rem; margin: 0 auto; font-weight: 600; }
     
     #skills .skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
-    #skills .skill-tag { padding: 0.5rem 1rem; background-color: ${isDarkMode ? 'rgba(55, 65, 81, 0.5)' : 'rgba(255, 255, 255, 0.5)'}; border: 1px solid ${sanitize(themeSettings.primaryColor)}4D; color: var(--primary-color); border-radius: 9999px; font-size: 0.875rem; font-weight: 500; }
+    #skills .skill-tag { padding: 0.5rem 1rem; background-color: ${isDarkMode ? 'rgba(55, 65, 81, 0.5)' : 'rgba(255, 255, 255, 0.8)'}; border: 1px solid ${sanitize(themeSettings.primaryColor)}4D; color: var(--primary-color); border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
     
     .timeline { position: relative; border-left: 2px solid ${sanitize(themeSettings.primaryColor)}4D; padding-left: 2rem; display: grid; gap: 3rem; }
     .timeline-item { position: relative; }
     .timeline-item::before { content: ''; position: absolute; left: -2.5rem; top: 0.25rem; width: 1.25rem; height: 1.25rem; background-color: var(--primary-color); border-radius: 9999px; border: 4px solid var(--timeline-node-bg); box-shadow: 0 0 10px var(--primary-color); }
-    .timeline-item .duration { font-size: 0.875rem; color: var(--color-text-light); margin-bottom: 0.25rem; }
+    .timeline-item .duration { font-size: 0.875rem; color: var(--color-text-light); margin-bottom: 0.25rem; font-weight: 600; }
     .timeline-item h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: bold; color: var(--color-heading-text); margin: 0; }
-    .timeline-item .company { color: var(--primary-color); opacity: 0.95; margin: 0.25rem 0 0.5rem 0; }
+    .timeline-item .company { color: var(--primary-color); opacity: 0.95; margin: 0.25rem 0 0.5rem 0; font-weight: bold; }
     .timeline-item p { margin: 0; }
 
     #projects .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
@@ -83,7 +84,7 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
     .achievement-card p { color: var(--color-text-light); margin: 0.25rem 0 0 0; }
     
     #contact .contact-content { text-align: center; max-width: 36rem; margin: 0 auto; }
-    #contact p { margin-bottom: 1.5rem; font-size: 1.125rem; }
+    #contact p { margin-bottom: 1.5rem; font-size: 1.125rem; font-weight: 500; }
     #contact a.contact-button {
       display: inline-block;
       padding: 1rem 2rem;
@@ -105,7 +106,7 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
       transform: scale(1.05);
     }
 
-    footer { text-align: center; padding-top: 3rem; border-top: 1px solid ${isDarkMode ? '#1f2937' : '#d1d5db'}; }
+    footer { text-align: center; padding-top: 3rem; border-top: 1px solid ${isDarkMode ? '#1f2937' : '#cbd5e1'}; }
     footer .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
     footer a { color: var(--color-text-light); text-decoration: none; transition: color 0.3s; }
     footer a:hover { color: var(--primary-color); }
@@ -152,7 +153,7 @@ export const generateFuturisticHTML = (data: PortfolioData): string => {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale-1.0">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${sanitize(data.name)}'s Portfolio</title>
       ${getFontImports(themeSettings.fontPair)}
       <style>${css}</style>

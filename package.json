@@ -12,7 +12,8 @@
     "react-dom": "^19.2.0",
     "react": "^19.2.0",
     "framer-motion": "^11.3.11",
-    "firebase": "^12.5.0"
+    "firebase": "^12.5.0",
+    "@google/genai": "^1.30.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

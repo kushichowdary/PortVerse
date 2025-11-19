@@ -22,6 +22,10 @@ export const getFontImports = (fontPair: string): string => {
             fonts.add('Space+Grotesk:wght@400;500;700');
             fonts.add('Inter:wght@300;400;500;600;700');
             break;
+        case 'cinzel-lato':
+            fonts.add('Cinzel:wght@400;700');
+            fonts.add('Lato:wght@300;400;700');
+            break;
     }
     
     if (fonts.size === 0) return '';
@@ -46,6 +50,8 @@ export const getFontFamilies = (fontPair: string): { bodyFont: string, headingFo
             return { bodyFont: "'Roboto', sans-serif", headingFont: "'Roboto Mono', monospace" };
         case 'space-grotesk-inter':
             return { bodyFont: "'Inter', sans-serif", headingFont: "'Space Grotesk', sans-serif" };
+        case 'cinzel-lato':
+            return { bodyFont: "'Lato', sans-serif", headingFont: "'Cinzel', serif" };
         default:
              return { bodyFont: "'Poppins', sans-serif", headingFont: "'Orbitron', sans-serif" };
     }

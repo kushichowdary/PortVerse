@@ -4,224 +4,249 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portverse - Design Your Future</title>
+    <title>Portverse - Professional Portfolio Builder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Lora:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #0A0A0A;
-        overflow-x: hidden; /* Prevent horizontal scroll, allow vertical on mobile */
-      }
-      .font-orbitron {
-        font-family: 'Orbitron', sans-serif;
-      }
-      .font-space-grotesk {
-        font-family: 'Space Grotesk', sans-serif;
-      }
-      .glass-pane {
-        background-color: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      
-      /* --- Futuristic Theme Styles --- */
       :root {
-        --glow-radius: 6px;
-        --glow-spread: 2px;
-        --transition-speed: 0.4s;
+        --primary-theme-color: #8b5cf6; /* Violet-500 */
+        --primary-hover: #7c3aed; /* Violet-600 */
+        --bg-dark: #030712; /* Gray-950/Black */
+        --bg-card: rgba(17, 24, 39, 0.7); /* Gray-900 glass */
+        --border-color: rgba(148, 163, 184, 0.1);
       }
 
-      .dynamic-background {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: radial-gradient(
-            600px circle at var(--mouse-x) var(--mouse-y),
-            var(--bg-gradient-color),
-            transparent 40%
-          );
-          z-index: -2;
-          transition: background 0.2s linear;
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-dark);
+        color: #e2e8f0;
+        overflow-x: hidden;
       }
       
-      .glass-pane-enhanced {
-          background-color: rgba(12, 16, 28, 0.6);
-          backdrop-filter: blur(20px) saturate(180%);
-          -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 1rem;
-          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      /* Ultra-thin Cinematic Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
       }
-      
-      .btn-futuristic {
-          position: relative;
-          padding: 0.75rem 1.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 0.5rem;
-          font-family: 'Orbitron', sans-serif;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          color: #fff;
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(139, 92, 246, 0.3);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--primary-theme-color);
+      }
+
+      /* --- Cinematic Panel Style --- */
+      .cinematic-panel {
+          background: linear-gradient(180deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 
+            0 0 0 1px rgba(0,0,0,0.2),
+            0 20px 50px -12px rgba(0, 0, 0, 0.7),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+          border-radius: 1.25rem;
+      }
+
+      /* Interactive Login Card */
+      .login-card-interactive {
           background-color: transparent;
-          backdrop-filter: blur(5px);
-          overflow: hidden;
+          backdrop-filter: blur(0);
+          -webkit-backdrop-filter: blur(0);
+          border: 1px solid transparent;
+          border-radius: 1rem;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .login-card-interactive:hover {
+          background-color: var(--bg-card);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      }
+      
+      .btn-modern {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.625rem 1.25rem;
+          border-radius: 0.5rem;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.875rem;
+          font-weight: 600;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
-          transition: all var(--transition-speed) ease;
-          z-index: 1;
+          border: 1px solid transparent;
+          position: relative;
+          overflow: hidden;
       }
 
-      .btn-futuristic::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-          transition: left var(--transition-speed) ease;
-          z-index: -1;
+      .btn-modern.primary {
+          background-color: var(--primary-theme-color);
+          color: white;
+          box-shadow: 0 0 20px -5px rgba(139, 92, 246, 0.5);
       }
 
-      .btn-futuristic:hover::before {
-          left: 100%;
+      .btn-modern.primary:hover {
+          background-color: var(--primary-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.7);
+      }
+      
+      .btn-modern.primary:active {
+          transform: translateY(0);
       }
 
-      .btn-futuristic:hover {
-          transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 0 calc(var(--glow-radius) * 2) var(--glow-spread) var(--glow-color, #fff);
-          border-color: var(--glow-color, #fff);
-          color: #fff;
+      .btn-modern.secondary {
+          background-color: rgba(255, 255, 255, 0.03);
+          color: #cbd5e1;
+          border: 1px solid rgba(255, 255, 255, 0.08);
       }
 
-      .btn-futuristic:disabled {
-        opacity: 0.4;
+      .btn-modern.secondary:hover {
+          background-color: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+          color: white;
+      }
+
+      .btn-modern.danger {
+          background-color: rgba(239, 68, 68, 0.1);
+          color: #ef4444;
+          border: 1px solid rgba(239, 68, 68, 0.2);
+      }
+
+      .btn-modern.danger:hover {
+          background-color: #ef4444;
+          color: white;
+          box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+      }
+
+      .btn-modern:disabled {
+        opacity: 0.5;
         cursor: not-allowed;
-        pointer-events: none; /* Prevents hover effects and clicks */
-      }
-
-      .btn-futuristic.primary {
-          --glow-color: var(--primary-theme-color, #22d3ee);
-          border-color: var(--glow-color);
-          color: var(--glow-color);
-      }
-
-      .btn-futuristic.primary:hover {
-          background-color: var(--glow-color);
-          color: #0A0A0A;
+        filter: grayscale(1);
       }
       
-      .btn-futuristic.danger {
-          --glow-color: #f43f5e; /* rose-500 */
-          border-color: var(--glow-color);
-          color: var(--glow-color);
-      }
-
-      .btn-futuristic.danger:hover {
-          background-color: var(--glow-color);
-          color: #fff;
-      }
-      
-      .input-field-futuristic {
+      /* Cinematic Input Fields */
+      .input-field-modern {
           width: 100%;
           background-color: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          color: #e0e0e0;
-          padding: 0.75rem 1rem;
-          border-radius: 0.5rem;
-          transition: all 0.2s ease-in-out;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #f1f5f9;
+          padding: 0.85rem 1rem;
+          border-radius: 0.75rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           font-size: 0.9rem;
-          backdrop-filter: blur(3px);
+          font-family: 'Inter', sans-serif;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
       }
-      .input-field-futuristic::placeholder { color: #777; }
-      .input-field-futuristic:focus {
+      .input-field-modern::placeholder { color: #475569; transition: color 0.3s; }
+      .input-field-modern:hover {
+          border-color: rgba(255, 255, 255, 0.15);
+          background-color: rgba(0, 0, 0, 0.4);
+      }
+      .input-field-modern:focus {
           outline: none;
-          border-color: var(--primary-theme-color, #22d3ee);
-          box-shadow: 0 0 15px var(--primary-theme-color, #22d3ee);
+          border-color: var(--primary-theme-color);
+          background-color: rgba(15, 23, 42, 0.8);
+          box-shadow: 
+            0 0 0 1px var(--primary-theme-color),
+            0 0 15px rgba(139, 92, 246, 0.2);
+          transform: scale(1.01);
       }
       
+      /* Tab System */
       .sidebar-tabs {
-        position: relative;
         display: flex;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        gap: 0.5rem;
+        padding: 0.25rem;
+        overflow-x: auto;
         margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
+        /* Hide scrollbar for tabs */
+        -ms-overflow-style: none; 
+        scrollbar-width: none; 
       }
+      .sidebar-tabs::-webkit-scrollbar { 
+        display: none; 
+      }
+
       .sidebar-tab {
-        position: relative;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
         font-weight: 500;
-        color: #9ca3af;
+        color: #64748b;
         background: transparent;
         border: none;
         cursor: pointer;
-        transition: color 0.3s;
+        transition: all 0.3s ease;
+        position: relative;
         z-index: 1;
         white-space: nowrap;
+        border-radius: 999px;
+      }
+      .sidebar-tab:hover {
+          color: #cbd5e1;
+          background: rgba(255,255,255,0.05);
       }
       .sidebar-tab.active {
-        color: #fff;
+        color: white;
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
       }
-      .sidebar-tab-indicator {
-        position: absolute;
-        bottom: -1px;
-        height: 2px;
-        background-color: var(--primary-theme-color, #22d3ee);
-        border-radius: 2px;
-        box-shadow: 0 0 10px var(--primary-theme-color, #22d3ee);
-        z-index: 0;
-      }
-
+      
+      /* Form Labels */
       .sidebar-label {
-          color: var(--primary-theme-color, #22d3ee);
-          font-size: 0.875rem;
-          font-weight: 500;
+          color: #94a3b8;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
           margin-bottom: 0.5rem;
           display: block;
       }
       
       .theme-picker-btn {
           padding: 0.75rem;
-          border-radius: 0.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 0.75rem;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           background-color: rgba(0,0,0,0.2);
-          transition: all 0.2s ease;
+          color: #cbd5e1;
+          transition: all 0.3s ease;
           text-align: center;
+          font-size: 0.85rem;
+          position: relative;
+          overflow: hidden;
       }
       .theme-picker-btn:hover {
           background-color: rgba(255, 255, 255, 0.05);
-          border-color: rgba(255, 255, 255, 0.3);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-1px);
       }
       .theme-picker-btn.active {
-          border-color: var(--primary-theme-color, #22d3ee);
-          background-color: var(--primary-theme-color-trans, rgba(34, 211, 238, 0.1));
-          box-shadow: inset 0 0 10px var(--primary-theme-color-trans, rgba(34, 211, 238, 0.2)), 0 0 10px var(--primary-theme-color, #22d3ee);
+          border-color: var(--primary-theme-color);
+          background-color: rgba(139, 92, 246, 0.15);
           color: #fff;
+          box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
       }
       
-      /* Scrollbar styles */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        border: 2px solid transparent;
-        background-clip: content-box;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(255, 255, 255, 0.4);
+      .dynamic-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          /* Deep space gradient */
+          background: radial-gradient(circle at 10% 20%, rgba(76, 29, 149, 0.15), transparent 40%),
+                      radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1), transparent 30%),
+                      radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1), transparent 100%);
+          background-color: #020617;
+          z-index: -2;
       }
 
     </style>
@@ -234,7 +259,8 @@
     "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.11",
     "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
     "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
-    "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/"
+    "firebase/": "https://aistudiocdn.com/firebase@^12.5.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
   }
 }
 </script>

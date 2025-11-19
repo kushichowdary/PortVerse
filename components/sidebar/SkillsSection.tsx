@@ -6,13 +6,11 @@ const SkillsSection: React.FC = () => {
     const [skillsText, setSkillsText] = useState(portfolioData.skills.join(', '));
 
     useEffect(() => {
-        // Sync local state if global state changes (e.g., on reset)
         setSkillsText(portfolioData.skills.join(', '));
     }, [portfolioData.skills]);
 
     const handleBlur = () => {
         const skillsArray = skillsText.split(',').map(skill => skill.trim()).filter(Boolean);
-        // Only dispatch if the array has actually changed to avoid unnecessary re-renders
         if (JSON.stringify(skillsArray) !== JSON.stringify(portfolioData.skills)) {
             dispatch({type: 'UPDATE_DATA', payload: { skills: skillsArray }});
         }
@@ -26,7 +24,7 @@ const SkillsSection: React.FC = () => {
                 onChange={(e) => setSkillsText(e.target.value)} 
                 onBlur={handleBlur}
                 rows={5} 
-                className="input-field-futuristic"
+                className="input-field-modern"
             ></textarea>
         </div>
     );

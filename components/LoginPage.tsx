@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../services/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { initialPortfolioData } from '../contexts/PortfolioContext';
 import Waves from './ui/Waves';
 import TrueFocus from './ui/TrueFocus';
 import './ui/Waves.css';
 import './ui/TrueFocus.css';
 
 const LoginPage: React.FC = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
@@ -20,11 +22,26 @@ const LoginPage: React.FC = () => {
       setError('Please enter email and password.');
       return;
     }
+    if (isSignUp && !name.trim()) {
+        setError('Please enter your full name.');
+        return;
+    }
+
     setError('');
     setIsSubmitting(true);
     try {
       if (isSignUp) {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
+        
+        // Initialize user data in localStorage with their name so the builder picks it up immediately
+        const newUserPortfolio = { 
+            ...initialPortfolioData, 
+            name: name.trim(),
+            contactEmail: email // Also helpful to pre-fill email
+        };
+        localStorage.setItem('portfolioData', JSON.stringify(newUserPortfolio));
+
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }
@@ -58,15 +75,16 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0A0A] p-4">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0f172a] p-4">
       <Waves 
-        lineColor="rgba(34, 211, 238, 0.15)"
-        waveAmpX={64}
-        waveAmpY={32}
-        xGap={20}
-        yGap={20}
-        friction={0.95}
-        tension={0.002}
+        lineColor="rgba(139, 92, 246, 0.2)"
+        waveAmpX={50}
+        waveAmpY={25}
+        xGap={15}
+        yGap={25}
+        friction={0.96}
+        tension={0.01}
+        backgroundColor="#0f172a"
       />
       
       <motion.div
@@ -75,35 +93,57 @@ const LoginPage: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="relative z-10 text-center flex flex-col items-center w-full max-w-md"
       >
-        <div className="h-24 flex items-center">
+        <div className="h-24 flex items-center justify-center">
           <TrueFocus
             sentence="Portverse"
             manualMode={true}
-            borderColor="#22d3ee"
-            glowColor="rgba(34, 211, 238, 0.6)"
+            borderColor="#8b5cf6"
+            glowColor="rgba(139, 92, 246, 0.6)"
             animationDuration={0.3}
             blurAmount={3}
           />
         </div>
 
-        <p className="mt-2 text-lg font-light text-gray-400">
-          {isSignUp ? 'Create an account to design your future.' : 'Sign in to design your future.'}
+        <p className="mt-2 text-lg font-light text-slate-400">
+          {isSignUp ? 'Create an account to start building.' : 'Sign in to your workspace.'}
         </p>
 
         <motion.form
           onSubmit={handleSubmit}
-          className="w-full mt-12 p-8 glass-pane rounded-2xl space-y-6"
+          className="w-full mt-12 p-8 login-card-interactive rounded-2xl space-y-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {error && <p className="text-red-400 bg-red-900/50 p-3 rounded-md">{error}</p>}
+          {error && <p className="text-red-400 bg-red-900/20 p-3 rounded-md border border-red-900/50 text-sm">{error}</p>}
+          
+          <AnimatePresence>
+            {isSignUp && (
+                <motion.div
+                    initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginBottom: 24 }}
+                    exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                    className="overflow-hidden"
+                >
+                     <input
+                        type="text"
+                        placeholder="Full Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="input-field-modern"
+                        required={isSignUp}
+                        autoComplete="name"
+                    />
+                </motion.div>
+            )}
+          </AnimatePresence>
+
           <input
             type="email"
             placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
+            className="input-field-modern"
             required
             autoComplete="email"
           />
@@ -112,7 +152,7 @@ const LoginPage: React.FC = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
+            className="input-field-modern"
             required
             autoComplete={isSignUp ? "new-password" : "current-password"}
           />
@@ -120,42 +160,22 @@ const LoginPage: React.FC = () => {
              <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-futuristic primary w-full"
+                className="btn-modern primary w-full py-3 text-base"
             >
                 {isSubmitting ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Login')}
             </button>
           </div>
         </motion.form>
-        <p className="mt-6 text-gray-400">
+        <p className="mt-6 text-slate-400 text-sm">
           {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
           <button 
             onClick={() => { setIsSignUp(!isSignUp); setError(''); }} 
-            className="font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+            className="font-semibold text-violet-400 hover:text-violet-300 transition-colors"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}
           </button>
         </p>
       </motion.div>
-      <style>{`
-        .input-field {
-          width: 100%;
-          background-color: rgba(0,0,0,0.3);
-          border: 1px solid rgba(0, 255, 255, 0.2);
-          color: #e0e0e0;
-          padding: 0.75rem 1rem;
-          border-radius: 0.5rem;
-          transition: all 0.2s ease-in-out;
-          font-size: 1rem;
-        }
-        .input-field::placeholder {
-          color: #777;
-        }
-        .input-field:focus {
-          outline: none;
-          border-color: #00ffff;
-          box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-        }
-      `}</style>
     </div>
   );
 };

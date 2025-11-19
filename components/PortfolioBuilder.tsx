@@ -16,8 +16,10 @@ const PortfolioBuilder: React.FC<PortfolioBuilderProps> = ({ onLogout }) => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (backgroundRef.current) {
-        backgroundRef.current.style.setProperty('--mouse-x', `${e.clientX}px`);
-        backgroundRef.current.style.setProperty('--mouse-y', `${e.clientY}px`);
+          const { clientX, clientY } = e;
+          const moveX = clientX * 0.01;
+          const moveY = clientY * 0.01;
+          backgroundRef.current.style.backgroundPosition = `${moveX}px ${moveY}px`;
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -26,44 +28,39 @@ const PortfolioBuilder: React.FC<PortfolioBuilderProps> = ({ onLogout }) => {
     };
   }, []);
 
-  // Function to convert hex to RGB
-  const hexToRgb = (hex: string) => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
-        }
-      : null;
-  };
-  const primaryRgb = hexToRgb(portfolioData.themeSettings.primaryColor);
-
   return (
     <>
       <div 
         ref={backgroundRef} 
         className="dynamic-background" 
-        style={{ '--bg-gradient-color': `${portfolioData.themeSettings.primaryColor}20` } as React.CSSProperties}
       />
-      <div className="flex flex-col lg:flex-row h-screen p-4 gap-4" style={{
-        '--primary-theme-color': portfolioData.themeSettings.primaryColor,
-        '--primary-theme-color-trans': primaryRgb ? `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.1)` : 'rgba(34, 211, 238, 0.1)'
-      } as React.CSSProperties}>
+      
+      {/* Main Grid */}
+      <div className="flex flex-col lg:flex-row h-screen p-4 gap-6 overflow-hidden">
+        
+        {/* Editor Sidebar - The Command Center */}
         <motion.div 
-            className="w-full lg:w-[450px] h-1/2 lg:h-full overflow-hidden glass-pane-enhanced p-4 lg:p-6 flex flex-col"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full lg:w-[420px] h-[45%] lg:h-full flex flex-col cinematic-panel overflow-hidden relative z-20"
+            initial={{ opacity: 0, x: -100, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
+           {/* Decorative tech lines */}
+           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent opacity-50" />
+           <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700/50 to-transparent opacity-50" />
+           
           <BuilderSidebar />
         </motion.div>
+
+        {/* Live Preview - The Output Stage */}
         <motion.div 
-            className="w-full flex-1 h-1/2 lg:h-full overflow-hidden rounded-2xl"
+            className="w-full flex-1 h-[55%] lg:h-full rounded-2xl shadow-2xl border border-slate-800/50 bg-black/40 backdrop-blur-sm relative overflow-hidden group"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
+          {/* Subtle inner glow */}
+          <div className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-white/5 z-30" />
           <PortfolioPreview onLogout={onLogout} />
         </motion.div>
       </div>

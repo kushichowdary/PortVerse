@@ -1,14 +1,21 @@
+
 import { PortfolioData } from '../types';
 import { generateFuturisticHTML } from './template-generators/futuristicGenerator';
 import { generateMinimalistHTML } from './template-generators/minimalistGenerator';
 import { generateNeobrutalistHTML } from './template-generators/neobrutalistGenerator';
 import { generateModernHTML } from './template-generators/modernGenerator';
+import { generateElegantHTML } from './template-generators/elegantGenerator';
+import { generateTechDocHTML } from './template-generators/techDocGenerator';
+import { generateStudioHTML } from './template-generators/studioGenerator';
 
 const generators = {
   futuristic: generateFuturisticHTML,
   minimalist: generateMinimalistHTML,
   neobrutalist: generateNeobrutalistHTML,
   modern: generateModernHTML,
+  elegant: generateElegantHTML,
+  techdoc: generateTechDocHTML,
+  studio: generateStudioHTML,
 };
 
 export const generatePortfolioHTML = (data: PortfolioData): string => {

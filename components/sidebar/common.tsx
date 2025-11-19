@@ -3,10 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePortfolio } from '../../contexts/PortfolioContext';
 import { PortfolioData, ListItem } from '../../types';
 
+const listContainerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
 const itemVariants = {
-  initial: { opacity: 0, y: -20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, x: -30, transition: { duration: 0.2 } },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", bounce: 0.3 } },
+  exit: { opacity: 0, x: -50, scale: 0.9, transition: { duration: 0.2 } },
 };
 
 interface FieldConfig<V> {
@@ -32,98 +40,98 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
     const endOfListRef = useRef<HTMLDivElement>(null);
     const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-    // FIX: Use `as unknown as V[]` for type assertion. TypeScript cannot infer that `V`
-    // corresponds to the type of array accessed by `sectionName`, but the component's
-    // usage ensures this is a safe cast.
     const items = portfolioData[sectionName] as unknown as V[];
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
         const { name, value } = e.target;
+        updateItem(index, name as keyof Omit<V, 'id'>, value);
+    };
+
+    const updateItem = (index: number, field: keyof Omit<V, 'id'>, value: any) => {
         const newArr = [...items];
-        newArr[index] = { ...newArr[index], [name]: value };
+        newArr[index] = { ...newArr[index], [field]: value };
         const payload: Partial<PortfolioData> = { [sectionName]: newArr };
         dispatch({ type: 'UPDATE_DATA', payload });
-    };
+    }
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, index: number, fieldName: keyof Omit<V, 'id'>) => {
         const file = e.target.files?.[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const newArr = [...items];
-                newArr[index] = { ...newArr[index], [fieldName]: reader.result as string };
-                const payload: Partial<PortfolioData> = { [sectionName]: newArr };
-                dispatch({ type: 'UPDATE_DATA', payload });
+                updateItem(index, fieldName, reader.result as string);
             };
             reader.readAsDataURL(file);
         }
     };
 
-
     const addItem = () => {
-        if (maxItems && items.length >= maxItems) {
-            return; // Prevent adding more items if limit is reached
-        }
+        if (maxItems && items.length >= maxItems) return;
         const newItem = { id: crypto.randomUUID(), ...defaultItem };
         const newArr = [...items, newItem];
-        const payload: Partial<PortfolioData> = { [sectionName]: newArr };
-        dispatch({ type: 'UPDATE_DATA', payload });
-
-        setTimeout(() => {
-            endOfListRef.current?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        dispatch({ type: 'UPDATE_DATA', payload: { [sectionName]: newArr } });
+        setTimeout(() => endOfListRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
     };
 
     const removeItem = (idToRemove: string) => {
         const newArr = items.filter(item => item.id !== idToRemove);
-        const payload: Partial<PortfolioData> = { [sectionName]: newArr };
-        dispatch({ type: 'UPDATE_DATA', payload });
+        dispatch({ type: 'UPDATE_DATA', payload: { [sectionName]: newArr } });
     };
 
     const isLimitReached = maxItems ? items.length >= maxItems : false;
 
     return (
-        <div className="space-y-6">
-            <AnimatePresence>
+        <motion.div className="space-y-6" variants={listContainerVariants} initial="hidden" animate="show">
+            <AnimatePresence mode="popLayout">
                 {items.length > 0 ? items.map((item, index) => (
                     <motion.div 
                         key={item.id} 
                         variants={itemVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
                         layout
-                        className="p-4 border border-gray-700/50 rounded-lg space-y-3 bg-black/20 relative">
-                         <button onClick={() => removeItem(item.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold text-2xl z-10 w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-500/20 transition-colors">&times;</button>
+                        className="p-5 rounded-xl space-y-4 bg-slate-800/30 border border-slate-700/50 relative group hover:border-slate-600/50 transition-colors shadow-lg"
+                    >
+                        <div className="absolute -left-[1px] top-4 bottom-4 w-[3px] bg-violet-500/30 rounded-r-full group-hover:bg-violet-500 transition-colors"></div>
+                        
+                        <button 
+                            onClick={() => removeItem(item.id)} 
+                            className="absolute top-3 right-3 text-slate-500 hover:text-red-400 transition-colors bg-slate-900/50 hover:bg-slate-800 rounded-full w-7 h-7 flex items-center justify-center"
+                            title="Delete Item"
+                        >
+                            &times;
+                        </button>
+
                         {fields.map(field => {
                             if (field.isImageUpload) {
                                 return (
                                     <div key={field.name as string}>
                                         <label className="sidebar-label">{field.label}</label>
-                                        <div className="flex items-center gap-4">
-                                            <img src={item[field.name as keyof V] as string} alt="Preview" className="w-16 h-16 rounded-md object-cover border-2 border-gray-600" />
-                                            <div className="flex-grow">
-                                                <button
-                                                    onClick={() => fileInputRefs.current[index]?.click()}
-                                                    className="btn-futuristic primary w-full mb-2"
-                                                    style={{fontSize: '0.75rem', padding: '0.5rem 1rem'}}
-                                                >
-                                                    Upload Image
-                                                </button>
+                                        <div className="flex items-center gap-3 p-2 bg-black/20 rounded-lg border border-white/5">
+                                            <div className="w-12 h-12 shrink-0 rounded overflow-hidden bg-slate-900">
+                                                <img src={item[field.name as keyof V] as string} alt="Preview" className="w-full h-full object-cover opacity-80" />
+                                            </div>
+                                            <div className="flex-grow flex flex-col gap-2">
+                                                <div className="flex gap-2">
+                                                     <button
+                                                        onClick={() => fileInputRefs.current[index]?.click()}
+                                                        className="btn-modern secondary py-1 text-[10px] h-7 flex-1"
+                                                    >
+                                                        Select Image
+                                                    </button>
+                                                    <input
+                                                        type="file"
+                                                        ref={el => { if(el) fileInputRefs.current[index] = el; }}
+                                                        onChange={(e) => handleImageUpload(e, index, field.name)}
+                                                        accept="image/*"
+                                                        className="hidden"
+                                                    />
+                                                </div>
                                                 <input
                                                     type="text"
-                                                    name={field.name as string}
                                                     value={item[field.name as keyof V] as string}
                                                     onChange={(e) => handleInputChange(e, index)}
-                                                    className="input-field-futuristic text-xs"
-                                                    placeholder="Or paste image URL"
-                                                />
-                                                <input
-                                                    type="file"
-                                                    ref={el => { if(el) fileInputRefs.current[index] = el; }}
-                                                    onChange={(e) => handleImageUpload(e, index, field.name)}
-                                                    accept="image/*"
-                                                    className="hidden"
+                                                    className="input-field-modern !py-1 !text-[10px] !bg-transparent !border-none focus:!ring-0 !p-0"
+                                                    placeholder="Or paste URL..."
+                                                    name={field.name as string}
                                                 />
                                             </div>
                                         </div>
@@ -139,7 +147,7 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                                             value={item[field.name as keyof V] as string}
                                             onChange={(e) => handleInputChange(e, index)} 
                                             rows={3} 
-                                            className="input-field-futuristic"
+                                            className="input-field-modern resize-none"
                                         />
                                      ) : (
                                          <input 
@@ -147,7 +155,7 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                                             name={field.name as string} 
                                             value={item[field.name as keyof V] as string} 
                                             onChange={(e) => handleInputChange(e, index)} 
-                                            className="input-field-futuristic" 
+                                            className="input-field-modern" 
                                         />
                                      )}
                                  </div>
@@ -155,17 +163,29 @@ export const ListSection = <T extends ListSectionName, V extends ListItem>({ sec
                         })}
                     </motion.div>
                 )) : (
-                   <p className="text-center text-gray-500 py-4">No {sectionName} added yet.</p> 
+                    <motion.div 
+                        initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
+                        className="text-center py-10 border-2 border-dashed border-slate-800 rounded-xl bg-slate-900/20"
+                    >
+                        <p className="text-slate-500 text-sm font-medium">Empty Section</p>
+                        <p className="text-slate-600 text-xs mt-1">Add your {singularName.toLowerCase()} to get started</p>
+                    </motion.div> 
                 )}
             </AnimatePresence>
             <div ref={endOfListRef} />
-            <button 
+            <motion.button 
                 onClick={addItem} 
-                className="btn-futuristic primary w-full"
+                className="btn-modern primary w-full group relative overflow-hidden"
                 disabled={isLimitReached}
+                whileTap={{ scale: 0.98 }}
             >
-                {isLimitReached ? `${singularName} Limit Reached` : `Add ${singularName}`}
-            </button>
-        </div>
+                <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                    {isLimitReached ? `Max ${singularName} Reached` : `Add New ${singularName}`}
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out" />
+            </motion.button>
+        </motion.div>
     );
 };

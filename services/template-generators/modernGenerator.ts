@@ -13,10 +13,10 @@ export const generateModernHTML = (data: PortfolioData): string => {
       --primary-color: ${sanitize(themeSettings.primaryColor)};
       --font-body: ${bodyFont};
       --font-heading: ${headingFont};
-      --color-bg: ${isDarkMode ? '#111827' : '#f9fafb'};
+      --color-bg: ${isDarkMode ? '#111827' : '#ffffff'};
       --color-text: ${isDarkMode ? '#d1d5db' : '#374151'};
-      --color-heading: ${isDarkMode ? '#ffffff' : '#1f2937'};
-      --color-card-bg: ${isDarkMode ? '#1f2937' : '#ffffff'};
+      --color-heading: ${isDarkMode ? '#ffffff' : '#111827'};
+      --color-card-bg: ${isDarkMode ? '#1f2937' : '#f3f4f6'};
       --color-border: ${isDarkMode ? '#374151' : '#e5e7eb'};
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -28,6 +28,7 @@ export const generateModernHTML = (data: PortfolioData): string => {
       font-family: var(--font-body);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
     }
     .container { max-width: 56rem; margin: 0 auto; padding: 2rem; }
     @media (min-width: 768px) { .container { padding: 4rem 2rem; } }
@@ -37,7 +38,7 @@ export const generateModernHTML = (data: PortfolioData): string => {
     header h1 { font-family: var(--font-heading); font-size: 3.75rem; font-weight: 800; margin: 1.5rem 0 0.5rem; color: var(--color-heading); }
     header .tagline { font-size: 1.5rem; font-weight: 500; color: var(--primary-color); margin: 0; }
     header .socials { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; }
-    .social-link { color: var(--color-text); font-weight: 500; text-decoration: none; position: relative; transition: color 0.3s; }
+    .social-link { color: var(--color-text); font-weight: 600; text-decoration: none; position: relative; transition: color 0.3s; }
     .social-link:hover { color: var(--primary-color); }
     
     main { display: grid; gap: 5rem; }
@@ -61,18 +62,18 @@ export const generateModernHTML = (data: PortfolioData): string => {
         background-color: var(--primary-color);
     }
 
-    #profile p { font-size: 1.125rem; line-height: 1.7; }
+    #profile p { font-size: 1.125rem; line-height: 1.7; font-weight: 500; }
 
     #skills .skills-container { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-    .skill-tag { background-color: var(--color-card-bg); border: 1px solid var(--color-border); padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 500; }
+    .skill-tag { background-color: var(--color-card-bg); border: 1px solid var(--color-border); padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; }
     
     .timeline { position: relative; border-left: 2px solid var(--primary-color); padding-left: 2rem; display: grid; gap: 3rem; }
     .timeline-item { position: relative; }
     .timeline-dot { position: absolute; left: -2.5rem; top: 0.25rem; width: 1.25rem; height: 1.25rem; background-color: var(--color-bg); border: 3px solid var(--primary-color); border-radius: 9999px; }
-    .timeline-item .duration { position: absolute; left: -2rem; top: 0.25rem; font-size: 0.875rem; opacity: 0.6; transform: rotate(-90deg); transform-origin: left top; }
+    .timeline-item .duration { position: absolute; left: -2rem; top: 0.25rem; font-size: 0.875rem; opacity: 0.7; transform: rotate(-90deg); transform-origin: left top; font-weight: bold; }
     .timeline-item h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin: 0; }
     .timeline-item .company { font-size: 1rem; font-weight: 600; color: var(--primary-color); margin: 0.25rem 0 0.5rem 0; }
-    .timeline-item p { margin: 0; opacity: 0.8; }
+    .timeline-item p { margin: 0; opacity: 0.9; }
     
     #projects .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
     .project-card { display: block; text-decoration: none; color: inherit; background-color: var(--color-card-bg); border-radius: 0.75rem; border: 1px solid var(--color-border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05); transition: all 0.3s ease-in-out; }
@@ -80,16 +81,16 @@ export const generateModernHTML = (data: PortfolioData): string => {
     .project-card img { width: 100%; height: 14rem; object-fit: cover; border-top-left-radius: 0.75rem; border-top-right-radius: 0.75rem; }
     .project-card .info { padding: 1.5rem; }
     .project-card h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin: 0 0 0.5rem 0; }
-    .project-card p { font-size: 0.875rem; opacity: 0.8; margin: 0; }
+    .project-card p { font-size: 0.875rem; opacity: 0.9; margin: 0; }
 
     #education .education-list { display: grid; gap: 1.5rem; }
     .education-item .header { display: flex; justify-content: space-between; align-items: baseline; }
     .education-item h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin: 0; }
-    .education-item .duration { font-size: 0.875rem; opacity: 0.6; }
-    .education-item .degree { font-size: 1rem; }
+    .education-item .duration { font-size: 0.875rem; opacity: 0.7; font-weight: 600; }
+    .education-item .degree { font-size: 1rem; font-weight: 500; }
     
     #contact { text-align: center; }
-    #contact p { font-size: 1.125rem; max-width: 48rem; margin: 0 auto 2rem; opacity: 0.8; }
+    #contact p { font-size: 1.125rem; max-width: 48rem; margin: 0 auto 2rem; opacity: 0.9; font-weight: 500; }
     .contact-btn { display: inline-block; background-color: var(--primary-color); color: ${isDarkMode ? '#000' : '#fff'}; padding: 0.875rem 2.5rem; border-radius: 0.5rem; font-size: 1.125rem; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
     .contact-btn:hover { transform: scale(1.05); }
 

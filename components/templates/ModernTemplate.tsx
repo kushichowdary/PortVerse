@@ -50,7 +50,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
     profile: (
         <motion.section key="profile" id="about" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
             <h2 className={`section-title ${headingFontClass}`}>About Me</h2>
-            <motion.p variants={itemVariants} className={`text-lg leading-relaxed`}>{data.bio}</motion.p>
+            <motion.p variants={itemVariants} className={`text-lg leading-relaxed font-medium`}>{data.bio}</motion.p>
         </motion.section>
     ),
     passion: <></>,
@@ -73,10 +73,10 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
           {data.experience.map(exp => (
             <motion.div variants={itemVariants} key={exp.id} className="relative">
               <div className="timeline-dot"></div>
-              <p className="absolute -left-8 top-1 text-sm opacity-60 transform -rotate-90 origin-center tracking-wider">{exp.duration}</p>
+              <p className="absolute -left-8 top-1 text-sm opacity-70 transform -rotate-90 origin-center tracking-wider font-bold">{exp.duration}</p>
               <h3 className={`text-xl font-bold ${headingFontClass}`}>{exp.role}</h3>
-              <p className="text-md font-semibold company-name">{exp.company}</p>
-              <p className="mt-2 opacity-80">{exp.description}</p>
+              <p className="text-md font-bold company-name">{exp.company}</p>
+              <p className="mt-2 opacity-90">{exp.description}</p>
             </motion.div>
           ))}
           {data.experience.length === 0 && <p className="opacity-70">No experience added yet.</p>}
@@ -97,7 +97,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
               </div>
               <div className="p-6">
                 <h3 className={`text-xl font-bold mb-2 ${headingFontClass}`}>{project.name}</h3>
-                <p className="text-sm opacity-80">{project.description}</p>
+                <p className="text-sm opacity-90">{project.description}</p>
               </div>
             </motion.a>
           ))}
@@ -114,9 +114,9 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
             <motion.div variants={itemVariants} key={edu.id}>
               <div className="flex justify-between items-baseline">
                 <h3 className={`text-xl font-bold ${headingFontClass}`}>{edu.institution}</h3>
-                <p className="text-sm opacity-60">{edu.duration}</p>
+                <p className="text-sm opacity-70 font-semibold">{edu.duration}</p>
               </div>
-              <p className={`text-md`}>{edu.degree}</p>
+              <p className={`text-md font-medium`}>{edu.degree}</p>
             </motion.div>
           ))}
            {data.education.length === 0 && <p className="opacity-70">No education added yet.</p>}
@@ -127,13 +127,13 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
 
   return (
     <div 
-        className={`min-h-full p-6 md:p-12 lg:p-16 ${fontClass}`} 
+        className={`modern-template min-h-full p-6 md:p-12 lg:p-16 ${fontClass}`} 
         style={{
             '--primary-color': themeSettings.primaryColor,
-            '--color-bg': isDarkMode ? '#111827' : '#f9fafb',
-            '--color-text': isDarkMode ? '#d1d5db' : '#374151',
-            '--color-heading': isDarkMode ? '#ffffff' : '#1f2937',
-            '--color-card-bg': isDarkMode ? '#1f2937' : '#ffffff',
+            '--color-bg': isDarkMode ? '#111827' : '#ffffff', 
+            '--color-text': isDarkMode ? '#d1d5db' : '#374151', 
+            '--color-heading': isDarkMode ? '#ffffff' : '#111827',
+            '--color-card-bg': isDarkMode ? '#1f2937' : '#f3f4f6', 
             '--color-border': isDarkMode ? '#374151' : '#e5e7eb',
         } as React.CSSProperties}>
       <div className="max-w-4xl mx-auto">
@@ -162,14 +162,14 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
 
         <main className="space-y-20">
           {data.sectionOrder
-            .filter(key => key !== 'passion' && key !== 'achievements') // Filter out sections not used in this template
+            .filter(key => key !== 'passion' && key !== 'achievements')
             .map(sectionKey => sectionComponents[sectionKey])
           }
 
           {data.contactEmail && (
             <motion.section id="contact" className="text-center" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
               <h2 className={`section-title ${headingFontClass}`}>Get In Touch</h2>
-              <p className="text-lg mb-8 max-w-xl mx-auto opacity-80">
+              <p className="text-lg mb-8 max-w-xl mx-auto opacity-90 font-medium">
                 I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
               </p>
               <motion.a href={`mailto:${data.contactEmail}`}
@@ -190,11 +190,13 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
         </footer>
       </div>
       <style>{`
-        body {
+        .modern-template {
             background-color: var(--color-bg);
             color: var(--color-text);
         }
-        h1, h2, h3 {
+        .modern-template h1, 
+        .modern-template h2, 
+        .modern-template h3 {
             color: var(--color-heading);
         }
         .section-title {
@@ -218,7 +220,7 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
             border: 1px solid var(--color-border);
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
         }
         .timeline {
             border-color: var(--primary-color);
@@ -244,12 +246,12 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
             transition: all 0.3s ease-in-out;
         }
         .project-card:hover {
-            box-shadow: 0 10px 15px -3px ${themeSettings.primaryColor}20, 0 4px 6px -4px ${themeSettings.primaryColor}20;
-            border-color: ${themeSettings.primaryColor}80;
+            box-shadow: 0 10px 15px -3px hsla(from var(--primary-color) h s l / 0.1), 0 4px 6px -4px hsla(from var(--primary-color) h s l / 0.1);
+            border-color: hsla(from var(--primary-color) h s l / 0.5);
         }
         .social-link {
             color: var(--color-text);
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
             position: relative;
             transition: color 0.3s;

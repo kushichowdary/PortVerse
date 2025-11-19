@@ -18,11 +18,11 @@ const ContactSection: React.FC = () => {
           name="contactEmail"
           value={portfolioData.contactEmail}
           onChange={handleInputChange}
-          className="input-field-futuristic"
+          className="input-field-modern"
           placeholder="your.email@example.com"
         />
       </div>
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-slate-500">
         This email will be displayed in the contact section of your portfolio.
       </p>
     </div>

@@ -142,7 +142,7 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
 
   return (
     <div 
-        className={`min-h-full p-4 md:p-8 lg:p-12 ${fontClass}`} 
+        className={`neobrutalist-template min-h-full p-4 md:p-8 lg:p-12 ${fontClass}`} 
         style={{
             '--primary-color': themeSettings.primaryColor,
             '--color-bg-main': isDarkMode ? '#1a1a1a' : '#f0f0f0',
@@ -198,7 +198,7 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
         </footer>
       </div>
       <style>{`
-        body {
+        .neobrutalist-template {
             background-color: var(--color-bg-main);
             color: var(--color-text-main);
         }

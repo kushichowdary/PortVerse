@@ -49,14 +49,14 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
     profile: (
         <motion.section key="profile" id="about" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
             <h2 className={`section-title ${headingFontClass}`}>01 // PROFILE</h2>
-            <p className={`leading-relaxed max-w-3xl mx-auto text-center glass-pane p-8 rounded-2xl ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{data.bio}</p>
+            <p className={`leading-relaxed max-w-3xl mx-auto text-center glass-pane p-8 rounded-2xl ${isDarkMode ? 'text-gray-300' : 'text-slate-800'}`}>{data.bio}</p>
         </motion.section>
     ),
     passion: (
         <motion.section key="passion" id="passion" className="relative text-center" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
             <div className={`p-8 glass-pane border-[var(--primary-color)]/30 rounded-2xl`}>
-                <h3 className={`${headingFontClass} text-2xl mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>My Passion</h3>
-                <p className="text-[var(--primary-color)] opacity-90 text-lg max-w-2xl mx-auto">{data.passion}</p>
+                <h3 className={`${headingFontClass} text-2xl mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>My Passion</h3>
+                <p className="text-[var(--primary-color)] opacity-90 text-lg max-w-2xl mx-auto font-semibold">{data.passion}</p>
             </div>
         </motion.section>
     ),
@@ -67,7 +67,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                 {data.skills.map((skill, i) => (
                     <motion.span 
                         key={skill} 
-                        className={`px-4 py-2 border border-[var(--primary-color)]/30 text-[var(--primary-color)] rounded-full text-sm font-medium ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/50'}`}
+                        className={`px-4 py-2 border border-[var(--primary-color)]/30 text-[var(--primary-color)] rounded-full text-sm font-medium ${isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'}`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.05 }}
@@ -89,11 +89,11 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             >
                 {data.experience.map(exp => (
                     <motion.div key={exp.id} className="relative" variants={itemVariants}>
-                        <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-gray-100'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
-                        <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{exp.duration}</p>
-                        <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{exp.role}</h3>
-                        <p className="text-[var(--primary-color)] mb-2">{exp.company}</p>
-                        <p className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>{exp.description}</p>
+                        <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-slate-200'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
+                        <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-slate-500 font-semibold'}`}>{exp.duration}</p>
+                        <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{exp.role}</h3>
+                        <p className="text-[var(--primary-color)] mb-2 font-bold">{exp.company}</p>
+                        <p className={isDarkMode ? 'text-gray-300' : 'text-slate-800'}>{exp.description}</p>
                     </motion.div>
                 ))}
                  {data.experience.length === 0 && <p className="text-gray-500">No experience added yet.</p>}
@@ -116,8 +116,8 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                     >
                         <img src={project.imageUrl} alt={project.name} className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105" />
                         <div className="p-6">
-                            <h3 className={`${headingFontClass} text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{project.name}</h3>
-                            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{project.description}</p>
+                            <h3 className={`${headingFontClass} text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{project.name}</h3>
+                            <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-slate-700'}`}>{project.description}</p>
                         </div>
                     </motion.a>
                 ))}
@@ -137,7 +137,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                 {data.achievements.map(ach => (
                     <motion.div key={ach.id} className="p-6 glass-pane rounded-lg" variants={itemVariants}>
                         <h3 className={`${headingFontClass} text-lg font-bold text-[var(--primary-color)]`}>{ach.title}</h3>
-                        <p className={`mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{ach.description}</p>
+                        <p className={`mt-1 ${isDarkMode ? 'text-gray-400' : 'text-slate-700'}`}>{ach.description}</p>
                     </motion.div>
                 ))}
              </motion.div>
@@ -155,10 +155,10 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             >
                 {data.education.map(edu => (
                     <motion.div key={edu.id} className="relative" variants={itemVariants}>
-                        <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-gray-100'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
-                        <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{edu.duration}</p>
-                        <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{edu.institution}</h3>
-                        <p className="text-[var(--primary-color)]">{edu.degree}</p>
+                        <div className={`absolute -left-[40px] top-1 w-5 h-5 bg-[var(--primary-color)] rounded-full border-4 ${isDarkMode ? 'border-[#0A0A0A]' : 'border-slate-200'}`} style={{boxShadow: `0 0 15px ${themeSettings.primaryColor}80`}}></div>
+                        <p className={`text-sm mb-1 ${isDarkMode ? 'text-gray-400' : 'text-slate-500 font-semibold'}`}>{edu.duration}</p>
+                        <h3 className={`${headingFontClass} text-xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{edu.institution}</h3>
+                        <p className="text-[var(--primary-color)] font-medium">{edu.degree}</p>
                     </motion.div>
                 ))}
                  {data.education.length === 0 && <p className="text-gray-500">No education added yet.</p>}
@@ -169,7 +169,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
 
   return (
     <div 
-      className={`min-h-full p-8 md:p-12 lg:p-16 ${fontClass} ${isDarkMode ? 'bg-[#0A0A0A] text-gray-200' : 'bg-gray-100 text-gray-800'}`} 
+      className={`min-h-full p-8 md:p-12 lg:p-16 ${fontClass} ${isDarkMode ? 'bg-[#0A0A0A] text-gray-200' : 'bg-slate-200 text-slate-800'}`} 
       style={{'--primary-color': themeSettings.primaryColor} as React.CSSProperties}
     >
       <div 
@@ -191,8 +191,8 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             whileHover={{ scale: 1.05, rotate: 2 }}
         />
         <div>
-            <h1 className={`${headingFontClass} text-4xl md:text-6xl font-black uppercase tracking-wider mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{data.name}</h1>
-            <p className="text-lg md:text-xl text-[var(--primary-color)]">{data.tagline}</p>
+            <h1 className={`${headingFontClass} text-4xl md:text-6xl font-black uppercase tracking-wider mb-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{data.name}</h1>
+            <p className="text-lg md:text-xl text-[var(--primary-color)] font-semibold">{data.tagline}</p>
         </div>
       </motion.header>
 
@@ -203,7 +203,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             <motion.section id="contact" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
                 <h2 className={`section-title ${headingFontClass}`}>07 // CONNECT</h2>
                 <div className="text-center max-w-md mx-auto">
-                    <p className="mb-6 text-lg">I'm currently available for freelance work and open to discussing new projects. Let's create something amazing together.</p>
+                    <p className="mb-6 text-lg font-medium">I'm currently available for freelance work and open to discussing new projects. Let's create something amazing together.</p>
                     <a href={`mailto:${data.contactEmail}`}
                        className="inline-block px-8 py-4 bg-[var(--primary-color)]/20 border-2 border-[var(--primary-color)] text-[var(--primary-color)] font-bold font-orbitron text-lg uppercase rounded-lg backdrop-blur-sm
                      hover:bg-[var(--primary-color)] hover:text-black hover:shadow-[0_0_20px_var(--primary-color)]
@@ -214,13 +214,13 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             </motion.section>
         )}
         
-        <footer className={`text-center pt-12 ${isDarkMode ? 'border-t border-gray-800' : 'border-t border-gray-200'}`}>
+        <footer className={`text-center pt-12 ${isDarkMode ? 'border-t border-gray-800' : 'border-t border-gray-300'}`}>
              <div className="flex justify-center space-x-6 mb-4">
                 {data.socials.github && (
-                  <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-[var(--primary-color)] transition-colors`}>GitHub</a>
+                  <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'} hover:text-[var(--primary-color)] transition-colors`}>GitHub</a>
                 )}
                 {data.socials.linkedin && (
-                  <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'} hover:text-[var(--primary-color)] transition-colors`}>LinkedIn</a>
+                  <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'} hover:text-[var(--primary-color)] transition-colors`}>LinkedIn</a>
                 )}
              </div>
             <p className="text-gray-500 mt-4 text-sm">
@@ -239,10 +239,11 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
           margin-bottom: 2.5rem;
         }
         .glass-pane {
-            background-color: ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.5)'};
+            background-color: ${isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.7)'};
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'};
+            border: 1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
+            box-shadow: ${isDarkMode ? 'none' : '0 4px 6px rgba(0,0,0,0.05)'};
         }
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
         .font-poppins { font-family: 'Poppins', sans-serif; }
