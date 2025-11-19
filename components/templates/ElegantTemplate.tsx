@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PortfolioData, SectionKey } from '../../types';
 import { motion, Variants } from 'framer-motion';
@@ -24,34 +25,45 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
   let headingFamily = 'serif';
   let bodyFamily = 'sans-serif';
 
-  if (themeSettings.fontPair.includes('cinzel')) {
-     headingFamily = "'Cinzel', serif";
-     bodyFamily = "'Lato', sans-serif";
+  if (themeSettings.fontPair.includes('italiana')) {
+     headingFamily = "'Italiana', serif";
+     bodyFamily = "'Montserrat', sans-serif";
      fontImport = (
          <style>{`
-            @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400&display=swap');
             .font-heading { font-family: ${headingFamily}; }
             .font-body { font-family: ${bodyFamily}; }
          `}</style>
      );
-  } else if (themeSettings.fontPair.includes('playfair')) {
-     headingFamily = "'Playfair Display', serif";
-     bodyFamily = "'Montserrat', sans-serif";
-      fontImport = (
-         <style>{`
-            .font-heading { font-family: 'Playfair Display', serif; }
-            .font-body { font-family: 'Montserrat', sans-serif; }
-         `}</style>
-     );
   } else {
-      // Fallback
+      // Use mapped classes from index.html if not Italiana specific override needed
+      // But we want to ensure specificity for this template
        fontImport = (
          <style>{`
-            .font-heading { font-family: sans-serif; }
-            .font-body { font-family: sans-serif; }
+            .font-heading { font-family: inherit; }
+            .font-body { font-family: inherit; }
          `}</style>
      );
   }
+
+  // Fallback logic for other new fonts if selected in Elegant template
+  const containerFontClass = 
+    themeSettings.fontPair.includes('quicksand') ? 'font-quicksand' :
+    themeSettings.fontPair.includes('exo') ? 'font-exo' :
+    themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
+    themeSettings.fontPair.includes('roboto') ? 'font-roboto' :
+    themeSettings.fontPair.includes('dm') ? 'font-dm' :
+    themeSettings.fontPair.includes('inter') ? 'font-inter' :
+    '';
+
+  const headingFontClass = 
+    themeSettings.fontPair.includes('oswald') ? 'font-oswald' :
+    themeSettings.fontPair.includes('syncopate') ? 'font-syncopate' :
+    themeSettings.fontPair.includes('italiana') ? 'font-italiana' :
+    themeSettings.fontPair.includes('archivo') ? 'font-archivo' :
+    themeSettings.fontPair.includes('space') ? 'font-space' :
+    themeSettings.fontPair.includes('syne') ? 'font-syne' :
+    '';
 
   const bg = isDarkMode ? '#121212' : '#FAFAFA';
   const text = isDarkMode ? '#E0E0E0' : '#000000'; // Pure black for text in light mode
@@ -88,7 +100,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
     experience: (
       <motion.section key="experience" id="experience" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
         <div className="flex items-baseline justify-between mb-12">
-             <h2 className="text-4xl md:text-5xl font-heading">Career</h2>
+             <h2 className={`text-4xl md:text-5xl font-heading ${headingFontClass}`}>Career</h2>
         </div>
         <div className="space-y-16">
           {data.experience.map((exp) => (
@@ -97,7 +109,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
                    {exp.duration}
                </div>
                <div className="md:col-span-9">
-                   <h3 className="text-2xl font-heading mb-1">{exp.role}</h3>
+                   <h3 className={`text-2xl font-heading mb-1 ${headingFontClass}`}>{exp.role}</h3>
                    <p className="text-lg mb-4 font-body" style={{color: accent}}>{exp.company}</p>
                    <p className="font-body font-light leading-relaxed" style={{ opacity: isDarkMode ? 0.8 : 1 }}>{exp.description}</p>
                </div>
@@ -109,14 +121,14 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
     ),
     projects: (
        <motion.section key="projects" id="projects" variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-         <h2 className="text-4xl md:text-5xl font-heading mb-12">Selected Works</h2>
+         <h2 className={`text-4xl md:text-5xl font-heading mb-12 ${headingFontClass}`}>Selected Works</h2>
          <div className="grid md:grid-cols-2 gap-12">
              {data.projects.map((proj) => (
                  <a href={proj.link} key={proj.id} target="_blank" rel="noopener noreferrer" className="group block">
                      <div className="overflow-hidden mb-6 aspect-[4/3]">
                          <img src={proj.imageUrl} alt={proj.name} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale hover:grayscale-0" />
                      </div>
-                     <h3 className="text-2xl font-heading mb-2 group-hover:underline decoration-1 underline-offset-4">{proj.name}</h3>
+                     <h3 className={`text-2xl font-heading mb-2 group-hover:underline decoration-1 underline-offset-4 ${headingFontClass}`}>{proj.name}</h3>
                      <p className="font-body font-light" style={{color: muted}}>{proj.description}</p>
                  </a>
              ))}
@@ -130,7 +142,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
          <div className="grid md:grid-cols-2 gap-8">
              {data.achievements.map((ach) => (
                  <div key={ach.id} className="border p-8" style={{borderColor: border}}>
-                     <h4 className="text-lg font-heading mb-2" style={{color: accent}}>{ach.title}</h4>
+                     <h4 className={`text-lg font-heading mb-2 ${headingFontClass}`} style={{color: accent}}>{ach.title}</h4>
                      <p className="font-body font-light text-sm" style={{ opacity: isDarkMode ? 0.8 : 1 }}>{ach.description}</p>
                  </div>
              ))}
@@ -147,7 +159,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
                  {data.education.map(edu => (
                      <div key={edu.id} className="flex justify-between items-start">
                          <div>
-                             <h4 className="text-xl font-heading">{edu.institution}</h4>
+                             <h4 className={`text-xl font-heading ${headingFontClass}`}>{edu.institution}</h4>
                              <p className="font-body font-light">{edu.degree}</p>
                          </div>
                          <span className="font-body text-sm" style={{color: muted}}>{edu.duration}</span>
@@ -161,7 +173,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
 
   return (
     <div 
-        className="min-h-full w-full"
+        className={`min-h-full w-full ${containerFontClass}`}
         style={{ backgroundColor: bg, color: text }}
     >
       {fontImport}
@@ -169,7 +181,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
          <header className="mb-24 md:mb-32">
              <div className="flex flex-col md:flex-row items-start justify-between gap-8">
                  <div>
-                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-none mb-6">
+                     <h1 className={`text-5xl md:text-7xl lg:text-8xl font-heading font-normal tracking-tight leading-none mb-6 ${headingFontClass}`}>
                          {data.name}
                      </h1>
                      <p className="text-xl md:text-2xl font-body font-light" style={{color: accent}}>
@@ -189,7 +201,7 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
             
             {data.contactEmail && (
                 <motion.section variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-20 text-center">
-                    <h2 className="text-3xl md:text-5xl font-heading mb-8">Let's create something timeless.</h2>
+                    <h2 className={`text-3xl md:text-5xl font-heading mb-8 ${headingFontClass}`}>Let's create something timeless.</h2>
                     <a href={`mailto:${data.contactEmail}`} className="inline-block border-b pb-1 text-xl font-body hover:text-[var(--accent)] transition-colors" style={{borderColor: text, '--accent': accent} as React.CSSProperties}>
                         {data.contactEmail}
                     </a>

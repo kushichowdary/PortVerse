@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PortfolioData, SectionKey } from '../../types';
 import { motion } from 'framer-motion';
@@ -23,18 +24,22 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
   const isDarkMode = themeSettings.mode === 'dark';
   
   const fontClass = 
-    themeSettings.fontPair.includes('poppins') ? 'font-poppins' :
+    themeSettings.fontPair.includes('quicksand') ? 'font-quicksand' :
+    themeSettings.fontPair.includes('exo') ? 'font-exo' :
     themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
-    themeSettings.fontPair.includes('lora') ? 'font-lora' :
+    themeSettings.fontPair.includes('roboto') ? 'font-roboto' :
+    themeSettings.fontPair.includes('dm') ? 'font-dm' :
     themeSettings.fontPair.includes('inter') ? 'font-inter' :
-    'font-roboto';
+    'font-quicksand';
 
   const headingFontClass =
-    themeSettings.fontPair.includes('orbitron') ? 'font-orbitron' :
-    themeSettings.fontPair.includes('playfair') ? 'font-playfair' :
-    themeSettings.fontPair.includes('space-grotesk') ? 'font-space-grotesk' :
-    themeSettings.fontPair.includes('roboto-mono') ? 'font-roboto-mono' :
-    'font-inter';
+    themeSettings.fontPair.includes('oswald') ? 'font-oswald' :
+    themeSettings.fontPair.includes('syncopate') ? 'font-syncopate' :
+    themeSettings.fontPair.includes('italiana') ? 'font-italiana' :
+    themeSettings.fontPair.includes('archivo') ? 'font-archivo' :
+    themeSettings.fontPair.includes('space') ? 'font-space' :
+    themeSettings.fontPair.includes('syne') ? 'font-syne' :
+    'font-oswald';
 
   const sectionComponents: Record<SectionKey, React.ReactNode> = {
     profile: (
@@ -253,15 +258,6 @@ const NeobrutalistTemplate: React.FC<TemplateProps> = ({ data }) => {
             box-shadow: 8px 8px 0px var(--color-text-main);
             transform: translate(-2px, -2px);
         }
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
-        .font-lora { font-family: 'Lora', serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
-        .font-roboto { font-family: 'Roboto', sans-serif; }
-        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
       `}</style>
     </div>
   );

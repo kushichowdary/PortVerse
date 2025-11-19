@@ -31,7 +31,7 @@ export interface Achievement extends ListItem {
 export interface ThemeSettings {
   templateId: 'futuristic' | 'minimalist' | 'neobrutalist' | 'modern' | 'elegant' | 'techdoc' | 'studio' | 'cyber';
   primaryColor: string;
-  fontPair: 'orbitron-poppins' | 'inter-lora' | 'playfair-montserrat' | 'roboto-mono-roboto' | 'space-grotesk-inter' | 'cinzel-lato';
+  fontPair: 'oswald-quicksand' | 'syncopate-exo' | 'italiana-montserrat' | 'archivo-roboto' | 'space-dm' | 'syne-inter';
   mode: 'dark' | 'light';
 }
 

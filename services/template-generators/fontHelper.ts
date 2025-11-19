@@ -1,30 +1,31 @@
+
 export const getFontImports = (fontPair: string): string => {
     const fonts = new Set<string>();
     
     switch(fontPair) {
-        case 'orbitron-poppins':
-            fonts.add('Orbitron:wght@400;700;900');
-            fonts.add('Poppins:wght@300;400;600;700');
+        case 'oswald-quicksand':
+            fonts.add('Oswald:wght@400;500;700');
+            fonts.add('Quicksand:wght@300;400;500;600;700');
             break;
-        case 'inter-lora':
+        case 'syncopate-exo':
+            fonts.add('Syncopate:wght@400;700');
+            fonts.add('Exo+2:wght@300;400;600');
+            break;
+        case 'italiana-montserrat':
+            fonts.add('Italiana');
+            fonts.add('Montserrat:wght@300;400;500;600;700');
+            break;
+        case 'archivo-roboto':
+            fonts.add('Archivo+Black');
+            fonts.add('Roboto:wght@300;400;500;700');
+            break;
+        case 'space-dm':
+            fonts.add('Space+Mono:wght@400;700');
+            fonts.add('DM+Sans:wght@400;500;700');
+            break;
+        case 'syne-inter':
+            fonts.add('Syne:wght@400;600;700;800');
             fonts.add('Inter:wght@300;400;500;600;700');
-            fonts.add('Lora:wght@400;500;600;700');
-            break;
-        case 'playfair-montserrat':
-            fonts.add('Playfair+Display:wght@400;700');
-            fonts.add('Montserrat:wght@400;500;700');
-            break;
-        case 'roboto-mono-roboto':
-            fonts.add('Roboto+Mono:wght@400;500');
-            fonts.add('Roboto:wght@400;500;700');
-            break;
-        case 'space-grotesk-inter':
-            fonts.add('Space+Grotesk:wght@400;500;700');
-            fonts.add('Inter:wght@300;400;500;600;700');
-            break;
-        case 'cinzel-lato':
-            fonts.add('Cinzel:wght@400;700');
-            fonts.add('Lato:wght@300;400;700');
             break;
     }
     
@@ -40,19 +41,19 @@ export const getFontImports = (fontPair: string): string => {
 
 export const getFontFamilies = (fontPair: string): { bodyFont: string, headingFont: string } => {
     switch(fontPair) {
-        case 'orbitron-poppins':
-            return { bodyFont: "'Poppins', sans-serif", headingFont: "'Orbitron', sans-serif" };
-        case 'inter-lora':
-            return { bodyFont: "'Lora', serif", headingFont: "'Inter', sans-serif" };
-        case 'playfair-montserrat':
-            return { bodyFont: "'Montserrat', sans-serif", headingFont: "'Playfair Display', serif" };
-        case 'roboto-mono-roboto':
-            return { bodyFont: "'Roboto', sans-serif", headingFont: "'Roboto Mono', monospace" };
-        case 'space-grotesk-inter':
-            return { bodyFont: "'Inter', sans-serif", headingFont: "'Space Grotesk', sans-serif" };
-        case 'cinzel-lato':
-            return { bodyFont: "'Lato', sans-serif", headingFont: "'Cinzel', serif" };
+        case 'oswald-quicksand':
+            return { bodyFont: "'Quicksand', sans-serif", headingFont: "'Oswald', sans-serif" };
+        case 'syncopate-exo':
+            return { bodyFont: "'Exo 2', sans-serif", headingFont: "'Syncopate', sans-serif" };
+        case 'italiana-montserrat':
+            return { bodyFont: "'Montserrat', sans-serif", headingFont: "'Italiana', serif" };
+        case 'archivo-roboto':
+            return { bodyFont: "'Roboto', sans-serif", headingFont: "'Archivo Black', sans-serif" };
+        case 'space-dm':
+            return { bodyFont: "'DM Sans', sans-serif", headingFont: "'Space Mono', monospace" };
+        case 'syne-inter':
+            return { bodyFont: "'Inter', sans-serif", headingFont: "'Syne', sans-serif" };
         default:
-             return { bodyFont: "'Poppins', sans-serif", headingFont: "'Orbitron', sans-serif" };
+             return { bodyFont: "'Quicksand', sans-serif", headingFont: "'Oswald', sans-serif" };
     }
 };

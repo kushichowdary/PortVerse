@@ -1,3 +1,4 @@
+
 import { PortfolioData, SectionKey } from '../../types';
 import { getFontImports, getFontFamilies } from './fontHelper';
 
@@ -67,10 +68,10 @@ export const generateModernHTML = (data: PortfolioData): string => {
     #skills .skills-container { display: flex; flex-wrap: wrap; gap: 0.75rem; }
     .skill-tag { background-color: var(--color-card-bg); border: 1px solid var(--color-border); padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; }
     
-    .timeline { position: relative; border-left: 2px solid var(--primary-color); padding-left: 2rem; display: grid; gap: 3rem; }
+    .timeline { position: relative; border-left: 2px solid var(--primary-color); padding-left: 3rem; display: grid; gap: 3rem; }
     .timeline-item { position: relative; }
-    .timeline-dot { position: absolute; left: -2.5rem; top: 0.25rem; width: 1.25rem; height: 1.25rem; background-color: var(--color-bg); border: 3px solid var(--primary-color); border-radius: 9999px; }
-    .timeline-item .duration { position: absolute; left: -2rem; top: 0.25rem; font-size: 0.875rem; opacity: 0.7; transform: rotate(-90deg); transform-origin: left top; font-weight: bold; }
+    .timeline-dot { position: absolute; left: -3.55rem; top: 0.25rem; width: 1.25rem; height: 1.25rem; background-color: var(--color-bg); border: 3px solid var(--primary-color); border-radius: 9999px; }
+    .timeline-item .duration { position: absolute; left: -2.5rem; top: 0.25rem; font-size: 0.875rem; opacity: 0.7; transform: rotate(-90deg); transform-origin: left top; font-weight: bold; white-space: nowrap; width: 5rem; text-align: center; }
     .timeline-item h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin: 0; }
     .timeline-item .company { font-size: 1rem; font-weight: 600; color: var(--primary-color); margin: 0.25rem 0 0.5rem 0; }
     .timeline-item p { margin: 0; opacity: 0.9; }
@@ -84,9 +85,14 @@ export const generateModernHTML = (data: PortfolioData): string => {
     .project-card p { font-size: 0.875rem; opacity: 0.9; margin: 0; }
 
     #education .education-list { display: grid; gap: 1.5rem; }
-    .education-item .header { display: flex; justify-content: space-between; align-items: baseline; }
+    .education-item { border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem; }
+    .education-item:last-child { border-bottom: none; }
+    .education-item .header { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem; }
+    @media (min-width: 640px) {
+        .education-item .header { flex-direction: row; justify-content: space-between; align-items: baseline; }
+    }
     .education-item h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-heading); margin: 0; }
-    .education-item .duration { font-size: 0.875rem; opacity: 0.7; font-weight: 600; }
+    .education-item .duration { font-size: 0.875rem; opacity: 0.7; font-weight: 600; background: var(--color-card-bg); padding: 0.25rem 0.5rem; border-radius: 0.25rem; display: inline-block; }
     .education-item .degree { font-size: 1rem; font-weight: 500; }
     
     #contact { text-align: center; }

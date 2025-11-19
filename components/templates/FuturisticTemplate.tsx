@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PortfolioData, SectionKey } from '../../types';
 import { motion } from 'framer-motion';
@@ -34,16 +35,22 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
   const isDarkMode = themeSettings.mode === 'dark';
 
   const fontClass = 
-    themeSettings.fontPair.includes('poppins') ? 'font-poppins' :
+    themeSettings.fontPair.includes('quicksand') ? 'font-quicksand' :
+    themeSettings.fontPair.includes('exo') ? 'font-exo' :
     themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
-    themeSettings.fontPair.includes('lora') ? 'font-lora' :
-    'font-roboto';
+    themeSettings.fontPair.includes('roboto') ? 'font-roboto' :
+    themeSettings.fontPair.includes('dm') ? 'font-dm' :
+    themeSettings.fontPair.includes('inter') ? 'font-inter' :
+    'font-quicksand';
 
   const headingFontClass =
-    themeSettings.fontPair.includes('orbitron') ? 'font-orbitron' :
-    themeSettings.fontPair.includes('playfair') ? 'font-playfair' :
-    themeSettings.fontPair.includes('inter') ? 'font-inter' :
-    'font-roboto-mono';
+    themeSettings.fontPair.includes('oswald') ? 'font-oswald' :
+    themeSettings.fontPair.includes('syncopate') ? 'font-syncopate' :
+    themeSettings.fontPair.includes('italiana') ? 'font-italiana' :
+    themeSettings.fontPair.includes('archivo') ? 'font-archivo' :
+    themeSettings.fontPair.includes('space') ? 'font-space' :
+    themeSettings.fontPair.includes('syne') ? 'font-syne' :
+    'font-oswald';
 
   const sectionComponents: Record<SectionKey, React.ReactNode> = {
     profile: (
@@ -205,7 +212,7 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
                 <div className="text-center max-w-md mx-auto">
                     <p className="mb-6 text-lg font-medium">I'm currently available for freelance work and open to discussing new projects. Let's create something amazing together.</p>
                     <a href={`mailto:${data.contactEmail}`}
-                       className="inline-block px-8 py-4 bg-[var(--primary-color)]/20 border-2 border-[var(--primary-color)] text-[var(--primary-color)] font-bold font-orbitron text-lg uppercase rounded-lg backdrop-blur-sm
+                       className="inline-block px-8 py-4 bg-[var(--primary-color)]/20 border-2 border-[var(--primary-color)] text-[var(--primary-color)] font-bold text-lg uppercase rounded-lg backdrop-blur-sm
                      hover:bg-[var(--primary-color)] hover:text-black hover:shadow-[0_0_20px_var(--primary-color)]
                      transition-all duration-300 ease-in-out transform hover:scale-105">
                         Get In Touch
@@ -245,14 +252,6 @@ const FuturisticTemplate: React.FC<TemplateProps> = ({ data }) => {
             border: 1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
             box-shadow: ${isDarkMode ? 'none' : '0 4px 6px rgba(0,0,0,0.05)'};
         }
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
-        .font-lora { font-family: 'Lora', serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
-        .font-roboto { font-family: 'Roboto', sans-serif; }
       `}</style>
     </div>
   );

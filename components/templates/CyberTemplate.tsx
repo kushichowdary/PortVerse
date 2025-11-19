@@ -210,8 +210,12 @@ const CyberTemplate: React.FC<TemplateProps> = ({ data }) => {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
              {data.sectionOrder.map(key => sectionComponents[key])}
              
-             <footer className="py-12 text-center font-mono text-xs opacity-40">
-                 System_ID: {data.name.replace(/\s/g, '_').toUpperCase()} // v.2.0.4
+             <footer className="py-12 text-center font-mono text-xs opacity-40 flex flex-col gap-2 items-center">
+                 <div>System_ID: {data.name.replace(/\s/g, '_').toUpperCase()} // v.2.0.4</div>
+                 <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-[var(--primary)] animate-pulse" style={{'--primary': primary} as React.CSSProperties}></span>
+                    Designed_with_Portverse
+                 </div>
              </footer>
         </div>
 

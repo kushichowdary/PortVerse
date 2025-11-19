@@ -23,7 +23,7 @@ export const initialPortfolioData: PortfolioData = {
   themeSettings: {
     templateId: 'modern',
     primaryColor: '#8b5cf6', // Violet
-    fontPair: 'inter-lora',
+    fontPair: 'syne-inter',
     mode: 'light',
   },
   sectionOrder: ['profile', 'passion', 'skills', 'experience', 'projects', 'achievements', 'education']

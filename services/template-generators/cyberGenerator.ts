@@ -94,9 +94,12 @@ export const generateCyberHTML = (data: PortfolioData): string => {
     .exp-meta { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.5rem; }
     .exp-role { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; }
     
-    footer { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; opacity: 0.4; padding-bottom: 2rem; }
+    footer { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; opacity: 0.4; padding-bottom: 2rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
+    .designed-with { display: flex; align-items: center; gap: 0.5rem; }
+    .pulse-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
 
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; box-shadow: 0 0 5px var(--primary); } 100% { opacity: 0.5; } }
   `;
 
   const sectionRenderers: Record<SectionKey, () => string> = {
@@ -220,7 +223,10 @@ export const generateCyberHTML = (data: PortfolioData): string => {
       <div class="container">
          ${data.sectionOrder.map(key => sectionRenderers[key]()).join('')}
          <footer>
-            System_ID: ${sanitize(data.name).toUpperCase().replace(/\s/g, '_')} // v2.0.4
+            <div>System_ID: ${sanitize(data.name).toUpperCase().replace(/\s/g, '_')} // v2.0.4</div>
+            <div class="designed-with">
+                <span class="pulse-dot"></span> Designed_with_Portverse
+            </div>
          </footer>
       </div>
     </body>

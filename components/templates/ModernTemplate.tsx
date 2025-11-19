@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PortfolioData, SectionKey } from '../../types';
 import { motion, Variants } from 'framer-motion';
@@ -33,18 +34,22 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
   const isDarkMode = themeSettings.mode === 'dark';
   
   const fontClass = 
-    themeSettings.fontPair.includes('poppins') ? 'font-poppins' :
+    themeSettings.fontPair.includes('quicksand') ? 'font-quicksand' :
+    themeSettings.fontPair.includes('exo') ? 'font-exo' :
     themeSettings.fontPair.includes('montserrat') ? 'font-montserrat' :
-    themeSettings.fontPair.includes('lora') ? 'font-lora' :
+    themeSettings.fontPair.includes('roboto') ? 'font-roboto' :
+    themeSettings.fontPair.includes('dm') ? 'font-dm' :
     themeSettings.fontPair.includes('inter') ? 'font-inter' :
-    'font-roboto';
+    'font-quicksand';
 
   const headingFontClass =
-    themeSettings.fontPair.includes('orbitron') ? 'font-orbitron' :
-    themeSettings.fontPair.includes('playfair') ? 'font-playfair' :
-    themeSettings.fontPair.includes('space-grotesk') ? 'font-space-grotesk' :
-    themeSettings.fontPair.includes('roboto-mono') ? 'font-roboto-mono' :
-    'font-inter';
+    themeSettings.fontPair.includes('oswald') ? 'font-oswald' :
+    themeSettings.fontPair.includes('syncopate') ? 'font-syncopate' :
+    themeSettings.fontPair.includes('italiana') ? 'font-italiana' :
+    themeSettings.fontPair.includes('archivo') ? 'font-archivo' :
+    themeSettings.fontPair.includes('space') ? 'font-space' :
+    themeSettings.fontPair.includes('syne') ? 'font-syne' :
+    'font-oswald';
     
   const sectionComponents: Record<SectionKey, React.ReactNode> = {
     profile: (
@@ -69,11 +74,12 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
     experience: (
       <motion.section key="experience" id="experience" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
         <h2 className={`section-title ${headingFontClass}`}>Experience</h2>
-        <div className="relative border-l-2 pl-8 space-y-12 timeline">
+        {/* Increased padding-left (pl-12) to prevent rotated duration from overlapping */}
+        <div className="relative border-l-2 pl-12 space-y-12 timeline">
           {data.experience.map(exp => (
             <motion.div variants={itemVariants} key={exp.id} className="relative">
               <div className="timeline-dot"></div>
-              <p className="absolute -left-8 top-1 text-sm opacity-70 transform -rotate-90 origin-center tracking-wider font-bold">{exp.duration}</p>
+              <p className="absolute -left-10 top-1 text-sm opacity-70 transform -rotate-90 origin-center tracking-wider font-bold w-20 text-center">{exp.duration}</p>
               <h3 className={`text-xl font-bold ${headingFontClass}`}>{exp.role}</h3>
               <p className="text-md font-bold company-name">{exp.company}</p>
               <p className="mt-2 opacity-90">{exp.description}</p>
@@ -109,12 +115,13 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
     education: (
       <motion.section key="education" id="education" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
         <h2 className={`section-title ${headingFontClass}`}>Education</h2>
-        <div className="space-y-6">
+        <div className="space-y-8">
           {data.education.map(edu => (
-            <motion.div variants={itemVariants} key={edu.id}>
-              <div className="flex justify-between items-baseline">
+            <motion.div variants={itemVariants} key={edu.id} className="border-b border-[var(--color-border)] pb-6 last:border-0">
+              {/* Changed to flex-col on mobile to prevent overlapping */}
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-2">
                 <h3 className={`text-xl font-bold ${headingFontClass}`}>{edu.institution}</h3>
-                <p className="text-sm opacity-70 font-semibold">{edu.duration}</p>
+                <p className="text-sm opacity-70 font-semibold bg-[var(--color-card-bg)] px-2 py-1 rounded inline-block w-fit">{edu.duration}</p>
               </div>
               <p className={`text-md font-medium`}>{edu.degree}</p>
             </motion.div>
@@ -286,15 +293,6 @@ const ModernTemplate: React.FC<TemplateProps> = ({ data }) => {
             text-decoration: none;
             transition: all 0.2s ease;
         }
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
-        .font-lora { font-family: 'Lora', serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-        .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
-        .font-roboto { font-family: 'Roboto', sans-serif; }
-        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
       `}</style>
     </div>
   );

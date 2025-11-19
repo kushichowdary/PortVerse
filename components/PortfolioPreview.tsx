@@ -39,6 +39,28 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ onLogout }) => {
     try {
       const htmlContent = generatePortfolioHTML(portfolioData);
       const blob = new Blob([htmlContent], { type: 'text/html' });
+      
+      // File Size Check (25MB limit warning)
+      const fileSizeInBytes = blob.size;
+      const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+      const WARNING_LIMIT_MB = 25;
+
+      if (fileSizeInMB > WARNING_LIMIT_MB) {
+        const proceed = window.confirm(
+            `⚠️ High File Size Warning\n\n` +
+            `Your portfolio file is ${fileSizeInMB.toFixed(2)} MB.\n` +
+            `This exceeds the recommended ${WARNING_LIMIT_MB} MB limit. Large files may load slowly for visitors or be rejected by some hosting providers.\n\n` +
+            `This is usually caused by large high-resolution images.\n\n` +
+            `Do you want to download anyway?`
+        );
+
+        if (!proceed) {
+            setIsDownloading(false);
+            addToast('Download cancelled by user.', 'info');
+            return;
+        }
+      }
+
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -79,7 +101,7 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ onLogout }) => {
             disabled={isDownloading}
             className="btn-modern primary"
           >
-            {isDownloading ? 'Generating...' : 'Download Code'}
+            {isDownloading ? 'Processing...' : 'Download Code'}
           </button>
            <button
             onClick={onLogout}

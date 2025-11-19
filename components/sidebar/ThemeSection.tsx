@@ -32,31 +32,31 @@ const colors = [
 ];
 
 const fontPairs = [
-    { id: 'orbitron-poppins', name: 'Orbitron / Poppins' },
-    { id: 'inter-lora', name: 'Inter / Lora' },
-    { id: 'playfair-montserrat', name: 'Playfair / Montserrat'},
-    { id: 'roboto-mono-roboto', name: 'Roboto Mono / Roboto'},
-    { id: 'space-grotesk-inter', name: 'Space Grotesk / Inter'},
-    { id: 'cinzel-lato', name: 'Cinzel / Lato'},
+    { id: 'oswald-quicksand', name: 'Oswald / Quicksand', style: 'Modern Condensed' },
+    { id: 'syncopate-exo', name: 'Syncopate / Exo 2', style: 'Futuristic Wide' },
+    { id: 'italiana-montserrat', name: 'Italiana / Montserrat', style: 'Elegant Editorial' },
+    { id: 'archivo-roboto', name: 'Archivo / Roboto', style: 'Bold Impact' },
+    { id: 'space-dm', name: 'Space Mono / DM Sans', style: 'Digital Brutalist' },
+    { id: 'syne-inter', name: 'Syne / Inter', style: 'Avant-Garde' },
 ] as const;
 
 const getHeadingFontClass = (id: string) => {
-    if (id.includes('orbitron')) return 'font-orbitron';
-    if (id.includes('playfair')) return 'font-playfair';
-    if (id.includes('inter')) return 'font-inter';
-    if (id.includes('roboto-mono')) return 'font-roboto-mono';
-    if (id.includes('space-grotesk')) return 'font-space-grotesk';
-    if (id.includes('cinzel')) return 'font-serif';
+    if (id.includes('oswald')) return 'font-oswald';
+    if (id.includes('syncopate')) return 'font-syncopate';
+    if (id.includes('italiana')) return 'font-italiana';
+    if (id.includes('archivo')) return 'font-archivo';
+    if (id.includes('space')) return 'font-space';
+    if (id.includes('syne')) return 'font-syne';
     return '';
 };
 
 const getBodyFontClass = (id: string) => {
-    if (id.includes('poppins')) return 'font-poppins';
+    if (id.includes('quicksand')) return 'font-quicksand';
+    if (id.includes('exo')) return 'font-exo';
     if (id.includes('montserrat')) return 'font-montserrat';
-    if (id.includes('lora')) return 'font-lora';
     if (id.includes('roboto')) return 'font-roboto';
+    if (id.includes('dm')) return 'font-dm';
     if (id.includes('inter')) return 'font-inter';
-    if (id.includes('lato')) return 'font-sans';
     return '';
 };
 
@@ -133,17 +133,20 @@ const ThemeSection: React.FC = () => {
             </div>
 
             <div>
-                <label className="sidebar-label">Font Pairing</label>
+                <label className="sidebar-label">Typography Style</label>
                 <div className="grid grid-cols-1 gap-3">
                      {fontPairs.map(font => (
                         <button 
                             key={font.id}
                             onClick={() => handleThemeChange('fontPair', font.id)}
-                            className={`theme-picker-btn ${portfolioData.themeSettings.fontPair === font.id ? 'active' : ''}`}
+                            className={`theme-picker-btn text-left px-4 !flex flex-col items-start gap-1 ${portfolioData.themeSettings.fontPair === font.id ? 'active' : ''}`}
                         >
-                            <span className={getHeadingFontClass(font.id)}>Heading</span> 
-                            {' / '}
-                            <span className={getBodyFontClass(font.id)}>Body Text</span>
+                            <span className="text-[10px] uppercase tracking-widest opacity-60">{font.style}</span>
+                            <div className="flex items-baseline gap-2">
+                                <span className={`${getHeadingFontClass(font.id)} text-base`}>Abc</span> 
+                                <span className="opacity-50">/</span>
+                                <span className={`${getBodyFontClass(font.id)} text-sm opacity-90`}>Abc</span>
+                            </div>
                         </button>
                     ))}
                 </div>
